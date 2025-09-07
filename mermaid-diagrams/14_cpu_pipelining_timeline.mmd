@@ -1,0 +1,35 @@
+
+timeline
+    title CPU Pipelining Overlapping Instruction Execution
+    
+    section Clock 1
+        Instr 1 : IF Fetch
+    
+    section Clock 2  
+        Instr 1 : ID Decode
+        Instr 2 : IF Fetch
+    
+    section Clock 3
+        Instr 1 : EX Execute
+        Instr 2 : ID Decode
+        Instr 3 : IF Fetch
+    
+    section Clock 4
+        Instr 1 : MEM Memory
+        Instr 2 : EX Execute
+        Instr 3 : ID Decode
+        Instr 4 : IF Fetch
+    
+    section Clock 5
+        Instr 1 : WB Writeback Complete
+        Instr 2 : MEM Memory
+        Instr 3 : EX Execute
+        Instr 4 : ID Decode
+        Instr 5 : IF Fetch
+    
+    section Clock 6
+        Instr 2 : WB Writeback Complete
+        Instr 3 : MEM Memory
+        Instr 4 : EX Execute
+        Instr 5 : ID Decode
+        Instr 6 : IF Fetch

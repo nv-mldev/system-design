@@ -1,0 +1,30 @@
+```mermaid
+flowchart LR
+    subgraph RISC["🏃 RISC Architecture"]
+        direction TB
+        R1["Simple Instructions<br/>3-5 cycles each"]
+        R2["ADD R1, R2, R3<br/>• Cycle 1: Fetch<br/>• Cycle 2: Decode<br/>• Cycle 3: Execute<br/>• Cycle 4: Writeback"]
+        R3["Uniform 32-bit instructions<br/>Predictable timing"]
+        R1 --> R2 --> R3
+    end
+    
+    subgraph CISC["🏗️ CISC Architecture"]
+        direction TB
+        C1["Complex Instructions<br/>1-40+ cycles each"]
+        C2["MOVE [EBP+8], EAX<br/>• Cycle 1-2: Fetch (variable length)<br/>• Cycle 3: Decode complex instruction<br/>• Cycle 4-5: Address calculation<br/>• Cycle 6-7: Memory read<br/>• Cycle 8-10: Execute<br/>• Cycle 11: Memory write"]
+        C3["Variable-length instructions<br/>Unpredictable timing"]
+        C1 --> C2 --> C3
+    end
+    
+    RISC -.->|Trade-off| Comparison["⚖️ Design Philosophy<br/><br/>RISC: More instructions, faster execution<br/>CISC: Fewer instructions, complex execution<br/><br/>RISC: Better for pipelining<br/>CISC: More powerful single instructions"]
+    CISC -.-> Comparison
+    
+    %% Styling
+    classDef riscStyle fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef ciscStyle fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef compStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    
+    class R1,R2,R3 riscStyle
+    class C1,C2,C3 ciscStyle
+    class Comparison compStyle
+```

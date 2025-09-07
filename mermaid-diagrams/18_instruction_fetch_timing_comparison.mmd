@@ -1,0 +1,30 @@
+```mermaid
+timeline
+    title Instruction Fetch RISC vs CISC Timing
+    
+    section RISC Fetch Pattern
+        Cycle 1 : Fetch 32-bit instruction at PC
+                : Decode starts immediately
+                : PC equals PC plus 4 predictable
+        
+        Cycle 2 : Fetch next 32-bit instruction at PC plus 4
+                : Previous instruction in decode
+                : Pipeline flows smoothly
+        
+        Cycle 3 : Fetch next 32-bit instruction at PC plus 8
+                : Consistent 4-byte increments
+                : No fetch stalls
+    
+    section CISC Fetch Pattern
+        Cycle 1 : Fetch first bytes at PC
+                : Don't know instruction length yet
+                : Partial decode to determine size
+        
+        Cycle 2 : May need additional fetch
+                : Instruction could be 1-15 bytes
+                : PC increment unknown until decode
+        
+        Cycle 3 : Complete instruction decode
+                : Finally know next PC value
+                : Pipeline may stall waiting
+```

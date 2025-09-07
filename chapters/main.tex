@@ -1,0 +1,246 @@
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+
+% Beamer theme and customization
+\usetheme{Madrid}
+\usecolortheme{whale}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{fancyvrb}
+
+% TikZ libraries
+\usetikzlibrary{shapes,arrows,positioning,calc,decorations.pathreplacing}
+
+% Code listing settings
+\lstset{
+    language=C,
+    basicstyle=\tiny\ttfamily,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{lightgray!10},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    frameround=tttt,
+    rulecolor=\color{black!30},
+    breaklines=true,
+    breakatwhitespace=false,
+    tabsize=2
+}
+
+% Custom colors
+\definecolor{lightblue}{RGB}{173,216,230}
+\definecolor{darkblue}{RGB}{0,90,156}
+\definecolor{lightgray}{RGB}{245,245,245}
+\definecolor{darkgray}{RGB}{128,128,128}
+
+% Presentation information
+\title[System Design \& Computer Architecture]{System Design and Computer Architecture}
+\subtitle{Understanding Modern Computing Systems}
+\author[Your Name]{Your Name}
+\institute[Institution]{
+    Department of Computer Science\\
+    Your Institution
+}
+\date{\today}
+
+% Custom commands for consistency
+\newcommand{\highlight}[1]{\textcolor{red}{\textbf{#1}}}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\concept}[1]{\textcolor{darkblue}{\textbf{#1}}}
+
+% Footer customization
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+
+% Title page customization
+\setbeamertemplate{title page}{
+    \vbox{}
+    \vfill
+    \begingroup
+        \centering
+        \begin{beamercolorbox}[sep=8pt,center,colsep=-4bp,rounded=true,shadow=true]{title}
+            \usebeamerfont{title}\inserttitle\par%
+            \ifx\insertsubtitle\@empty%
+            \else%
+                \vskip0.25em%
+                {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+            \fi%
+        \end{beamercolorbox}%
+        \vskip1em\par
+        \begin{beamercolorbox}[sep=8pt,center,colsep=-4bp,rounded=true,shadow=true]{author}
+            \usebeamerfont{author}\insertauthor
+        \end{beamercolorbox}
+        \begin{beamercolorbox}[sep=8pt,center,colsep=-4bp,rounded=true,shadow=true]{institute}
+            \usebeamerfont{institute}\insertinstitute
+        \end{beamercolorbox}
+        \begin{beamercolorbox}[sep=8pt,center,colsep=-4bp,rounded=true,shadow=true]{date}
+            \usebeamerfont{date}\insertdate
+        \end{beamercolorbox}\vskip0.5em
+    \endgroup
+    \vfill
+}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}
+    \frametitle{Course Overview}
+    \tableofcontents
+\end{frame}
+
+% Introduction slide
+\begin{frame}
+    \frametitle{Welcome to System Design \& Computer Architecture}
+    \begin{itemize}
+        \item \textbf{Course Objectives:}
+        \begin{itemize}
+            \item Understand fundamental computer architecture concepts
+            \item Learn system design principles and patterns
+            \item Explore modern computing technologies (RISC, ARM, x86)
+            \item Apply knowledge to real-world system design problems
+        \end{itemize}
+        \item \textbf{What You'll Learn:}
+        \begin{itemize}
+            \item CPU and memory architecture
+            \item Instruction set architectures (RISC vs CISC)
+            \item System performance optimization
+            \item Scalable system design patterns
+        \end{itemize}
+        \item \textbf{Prerequisites:} Basic programming knowledge, digital logic fundamentals
+    \end{itemize}
+\end{frame}
+
+% Chapter 1: Computer Organization and Architecture
+\input{chapter_1_coa.tex}
+
+% Future chapters can be added here
+% \input{chapter_2_memory.tex}
+% \input{chapter_3_io.tex}
+% \input{chapter_4_parallel.tex}
+% \input{chapter_5_performance.tex}
+% \input{chapter_6_system_design.tex}
+
+% Summary and conclusion
+\section{Course Summary}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item \textbf{Architecture Matters:}
+        \begin{itemize}
+            \item RISC vs CISC trade-offs shape modern computing
+            \item ARM's power efficiency revolutionizing mobile and laptop markets
+            \item x86's complexity enables high performance in servers and desktops
+        \end{itemize}
+        \item \textbf{System Design Principles:}
+        \begin{itemize}
+            \item Understand your hardware constraints and capabilities
+            \item Choose the right architecture for your use case
+            \item Balance performance, power, and cost requirements
+        \end{itemize}
+        \item \textbf{Future Trends:}
+        \begin{itemize}
+            \item ARM expanding into server and desktop markets
+            \item Heterogeneous computing (CPU + GPU + specialized processors)
+            \item Quantum and neuromorphic computing on the horizon
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Next Steps}
+    \begin{itemize}
+        \item \textbf{Hands-On Practice:}
+        \begin{itemize}
+            \item Experiment with ARM and x86 assembly language
+            \item Profile applications to understand performance bottlenecks
+            \item Design systems with different architectural constraints
+        \end{itemize}
+        \item \textbf{Further Learning:}
+        \begin{itemize}
+            \item Advanced computer architecture courses
+            \item System design interview preparation
+            \item Open-source hardware projects (RISC-V)
+            \item High-performance computing and parallel programming
+        \end{itemize}
+        \item \textbf{Career Applications:}
+        \begin{itemize}
+            \item System architecture roles
+            \item Performance engineering
+            \item Embedded systems development
+            \item Cloud infrastructure design
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% References and resources
+\begin{frame}
+    \frametitle{References and Resources}
+    \begin{itemize}
+        \item \textbf{Textbooks:}
+        \begin{itemize}
+            \item Computer Organization and Design - Patterson \& Hennessy
+            \item Computer Architecture: A Quantitative Approach - Hennessy \& Patterson
+            \item ARM System Developer's Guide - Sloss, Symes \& Wright
+        \end{itemize}
+        \item \textbf{Online Resources:}
+        \begin{itemize}
+            \item ARM Developer Documentation: \url{https://developer.arm.com}
+            \item Intel x86 Architecture Manuals: \url{https://intel.com/sdm}
+            \item RISC-V Foundation: \url{https://riscv.org}
+        \end{itemize}
+        \item \textbf{Tools and Simulators:}
+        \begin{itemize}
+            \item QEMU for architecture emulation
+            \item ARM Development Studio
+            \item Intel VTune Profiler
+            \item Online assembly simulators and debuggers
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Thank you slide
+\begin{frame}
+    \frametitle{Thank You!}
+    \begin{center}
+        \Huge Questions?
+        
+        \vspace{1cm}
+        
+        \large
+        Contact Information:\\
+        Email: your.email@institution.edu\\
+        Office Hours: By appointment
+        
+        \vspace{1cm}
+        
+        \normalsize
+        \textit{``The best way to learn computer architecture is to build one.''}\\
+        \textit{-- Anonymous Computer Architect}
+    \end{center}
+\end{frame}
+
+\end{document}

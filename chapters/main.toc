@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Chapter 1: The Building Blocks of a Computer - Understanding CPU and Memory Architecture}{4}{0}{1}
+\beamer@sectionintoc {2}{Course Summary}{19}{0}{2}

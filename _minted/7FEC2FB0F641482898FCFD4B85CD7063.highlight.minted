@@ -1,0 +1,4 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+GET\PYG{+w}{ }/authors/1\PYG{+w}{      }\PYG{c+c1}{\PYGZsh{} Request 1}
+GET\PYG{+w}{ }/books?author\PYGZus{}id\PYG{o}{=}\PYG{l+m}{1}\PYG{+w}{  }\PYG{c+c1}{\PYGZsh{} Request 2}
+\end{MintedVerbatim}

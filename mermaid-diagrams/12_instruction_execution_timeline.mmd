@@ -1,0 +1,28 @@
+
+timeline
+    title Instruction Execution Multi-Cycle Process
+    
+    section Cycle 1 IF
+        Fetch : CPU reads instruction from memory
+              : Program Counter points to instruction address
+              : Instruction loaded into Instruction Register
+    
+    section Cycle 2 ID
+        Decode : Control unit analyzes instruction opcode
+               : Determine operation type and required operands
+               : Read source registers if needed
+    
+    section Cycle 3 EX
+        Execute : ALU performs the actual computation
+                : Address calculation for memory operations
+                : Branch condition evaluation
+    
+    section Cycle 4 MEM
+        Memory : Read data from memory for LOAD instructions
+               : Write data to memory for STORE instructions
+               : Skip this phase for register-only operations
+    
+    section Cycle 5 WB
+        Writeback : Store result in destination register
+                  : Update processor flags if needed
+                  : Prepare for next instruction

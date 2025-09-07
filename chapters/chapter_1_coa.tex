@@ -1,0 +1,351 @@
+\section{Chapter 1: The Building Blocks of a Computer - Understanding CPU and Memory Architecture}
+\label{sec:chapter_1_coa}
+\begin{frame} 
+    \frametitle{A Computer's Anatomy}
+
+    \begin{itemize}
+        \item \textbf{Objective:} Understand the fundamental components of a computer system, focusing on CPU and memory architecture.
+        \item \textbf{Topics Covered:}
+        \begin{itemize}
+            \item The Von Neumann Architecture
+            \item CPU Components
+            \item Memory Hierarchy (Cache, RAM, Permanent Storage)
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame} 
+    \frametitle{Why It Matters}
+
+    \begin{itemize}
+        \item \textbf{Performance:} Knowing how CPU and memory interact helps in optimizing software performance.
+        \item \textbf{System Design:} Essential for designing efficient systems and applications.
+        \item \textbf{Troubleshooting:} Understanding hardware can aid in diagnosing performance bottlenecks.
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame} 
+    \frametitle{Computer Architecture Overview}
+    \begin{itemize}
+        \item \textbf{Computer Architecture:} The conceptual design and fundamental operational structure of a computer system.
+        \item \textbf{Key Components:}
+        \begin{itemize}
+            \item \textbf{CPU (Central Processing Unit):} Executes instructions and processes data.
+            \item \textbf{Memory:} Stores data and instructions temporarily (RAM) or permanently (SSD/HDD).
+            \item \textbf{I/O Devices:} Facilitate interaction with the external environment (keyboard, mouse, display).
+        \end{itemize}
+        \item \textbf{Data Flow:} The CPU fetches instructions from memory, processes them, and may read/write data to/from memory or I/O devices.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Types of architectures}
+\begin{itemize}
+    \item \textbf{Von Neumann Architecture:} Single memory space for instructions and data.
+    \item \textbf{Harvard Architecture:} Separate memory spaces for instructions and data.
+    \item \textbf{ARM Architecture:} A RISC-based design with a load/store model, unified memory, conditional execution, and deep pipelines; widely used in mobile and embedded systems for its power efficiency.
+    \item \textbf{Comparison:} Von Neumann is simpler and more common, Harvard can be faster for certain applications, while ARM combines RISC efficiency with a flexible, unified memory system.
+\end{itemize}   
+\end{frame}
+
+\begin{frame}
+\frametitle{Instruction Set Architectures: RISC vs CISC}
+\begin{itemize}
+    \item \textbf{RISC (Reduced Instruction Set Computer):}
+    \begin{itemize}
+        \item Simple, uniform instructions (typically 32-bit)
+        \item Load/Store architecture - only load/store access memory
+        \item One instruction per clock cycle (ideally)
+        \item More registers, simpler hardware
+    \end{itemize}
+    \item \textbf{CISC (Complex Instruction Set Computer):}
+    \begin{itemize}
+        \item Complex, variable-length instructions
+        \item Instructions can directly access memory
+        \item Multiple clock cycles per instruction
+        \item Fewer registers, more complex hardware
+    \end{itemize}
+    \item \textbf{Philosophy:} RISC favors simple hardware + smart compilers, CISC favors complex hardware + simple compilers
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{RISC vs CISC: Design Trade-offs}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{RISC Advantages:}
+\begin{itemize}
+    \item Simpler processor design
+    \item Lower power consumption
+    \item Better pipelining performance
+    \item Easier to optimize
+    \item Higher clock speeds possible
+\end{itemize}
+\textbf{RISC Disadvantages:}
+\begin{itemize}
+    \item More instructions needed
+    \item Larger code size
+    \item Complex compiler required
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{CISC Advantages:}
+\begin{itemize}
+    \item Fewer instructions needed
+    \item Smaller code size
+    \item Rich instruction set
+    \item Backward compatibility
+\end{itemize}
+\textbf{CISC Disadvantages:}
+\begin{itemize}
+    \item Complex processor design
+    \item Higher power consumption
+    \item Difficult to pipeline
+    \item Slower clock speeds
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{ARM Architecture: The RISC Champion}
+\begin{itemize}
+    \item \textbf{ARM (Advanced RISC Machine):} Dominant RISC architecture
+    \begin{itemize}
+        \item Founded by Acorn Computers (1985), now ARM Holdings
+        \item License-based business model - designs sold to manufacturers
+        \item Powers 95\% of smartphones and tablets worldwide
+    \end{itemize}
+    \item \textbf{Key ARM Characteristics:}
+    \begin{itemize}
+        \item \textbf{Load/Store Architecture:} Only load/store instructions access memory
+        \item \textbf{Fixed 32-bit Instructions:} Uniform instruction length (ARM64: 64-bit)
+        \item \textbf{Conditional Execution:} Most instructions can be conditionally executed
+        \item \textbf{Low Power Design:} Optimized for battery-powered devices
+    \end{itemize}
+    \item \textbf{ARM Processor Families:}
+    \begin{itemize}
+        \item \textbf{Cortex-A:} Application processors (smartphones, tablets)
+        \item \textbf{Cortex-R:} Real-time processors (automotive, industrial)
+        \item \textbf{Cortex-M:} Microcontrollers (IoT, embedded systems)
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{ARM Instruction Set Example}
+\begin{itemize}
+    \item \textbf{ARM Assembly Examples:}
+\end{itemize}
+\begin{verbatim}
+// Load/Store Operations
+LDR R1, [R2]        // Load word from memory[R2] to R1
+STR R1, [R2, #4]    // Store R1 to memory[R2 + 4]
+
+// Arithmetic Operations  
+ADD R1, R2, R3      // R1 = R2 + R3
+SUB R1, R2, #5      // R1 = R2 - 5 (immediate value)
+
+// Conditional Execution
+ADDEQ R1, R2, R3    // Add only if equal flag set
+MOVNE R1, #0        // Move 0 to R1 if not equal
+
+// Branch Instructions
+B label             // Unconditional branch
+BEQ label           // Branch if equal
+BL function         // Branch with link (function call)
+\end{verbatim}
+\begin{itemize}
+    \item \textbf{Note:} All instructions are 32-bit, enabling efficient pipelining
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{ARM's Modern Success: Apple Silicon}
+\begin{itemize}
+    \item \textbf{Apple's ARM Transition:}
+    \begin{itemize}
+        \item \textbf{M1 Chip (2020):} First ARM-based Mac processor
+        \item \textbf{M1 Pro/Max (2021):} High-performance variants
+        \item \textbf{M2 Series (2022+):} Next generation ARM processors
+    \end{itemize}
+    \item \textbf{ARM Advantages in Apple Silicon:}
+    \begin{itemize}
+        \item \textbf{Power Efficiency:} Exceptional battery life in MacBooks
+        \item \textbf{Unified Memory:} CPU and GPU share same memory pool
+        \item \textbf{Custom Silicon:} Apple designs custom ARM cores
+        \item \textbf{Performance:} Competitive with Intel/AMD x86 processors
+    \end{itemize}
+    \item \textbf{Market Impact:}
+    \begin{itemize}
+        \item Proved ARM can compete in laptop/desktop market
+        \item Microsoft developing ARM-based Windows
+        \item Amazon's Graviton ARM servers gaining adoption
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{x86 Architecture: The CISC Powerhouse}
+\begin{itemize}
+    \item \textbf{x86 History:}
+    \begin{itemize}
+        \item \textbf{Intel 8086 (1978):} Original 16-bit processor
+        \item \textbf{80386 (1985):} First 32-bit x86 processor
+        \item \textbf{x86-64/AMD64 (2003):} 64-bit extension by AMD
+        \item Dominates desktop, laptop, and server markets
+    \end{itemize}
+    \item \textbf{x86 CISC Characteristics:}
+    \begin{itemize}
+        \item \textbf{Variable Instruction Length:} 1 to 15 bytes per instruction
+        \item \textbf{Complex Instructions:} Single instruction can do multiple operations
+        \item \textbf{Memory-to-Memory Operations:} Direct memory manipulation
+        \item \textbf{Rich Addressing Modes:} Multiple ways to specify operands
+    \end{itemize}
+    \item \textbf{Modern x86 Complexity:}
+    \begin{itemize}
+        \item Hundreds of instructions in instruction set
+        \item Backward compatibility maintained since 8086
+        \item Internal RISC-like execution (micro-ops)
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{x86 Instruction Set Example}
+\begin{itemize}
+    \item \textbf{x86 Assembly Examples:}
+\end{itemize}
+\begin{verbatim}
+// Complex Memory Operations
+ADD [EBX], EAX      // Add EAX to memory[EBX], store in memory
+MOV EAX, [EBX+4]    // Load from memory[EBX+4] to EAX
+
+// Variable Length Instructions
+MOV AL, 5           // 2 bytes: Move immediate to 8-bit register
+MOV EAX, 0x12345678 // 5 bytes: Move 32-bit immediate to register
+
+// Complex Addressing Modes
+MOV EAX, [EBX + ECX*2 + 8]  // EAX = memory[EBX + ECX*2 + 8]
+
+// String Operations
+REP MOVSB          // Repeat move string bytes (hardware loop)
+
+// Stack Operations
+PUSH EAX           // Push EAX onto stack
+CALL function      // Call function (push return address + jump)
+\end{verbatim}
+\begin{itemize}
+    \item \textbf{Note:} Instructions vary from 1-15 bytes, complex decoding required
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modern x86: CISC Outside, RISC Inside}
+\begin{itemize}
+    \item \textbf{Micro-Operation Translation:}
+    \begin{itemize}
+        \item Complex x86 instructions decoded into simple micro-ops
+        \item Internal execution core is RISC-like
+        \item Best of both worlds: CISC compatibility + RISC performance
+    \end{itemize}
+    \item \textbf{Example Translation:}
+    \begin{itemize}
+        \item \texttt{ADD [EBX], EAX} becomes:
+        \item \texttt{LOAD temp, [EBX]} (micro-op 1)
+        \item \texttt{ADD temp, EAX} (micro-op 2)  
+        \item \texttt{STORE temp, [EBX]} (micro-op 3)
+    \end{itemize}
+    \item \textbf{Performance Techniques:}
+    \begin{itemize}
+        \item \textbf{Out-of-Order Execution:} Execute micro-ops as dependencies allow
+        \item \textbf{Superscalar:} Multiple execution units run in parallel
+        \item \textbf{Branch Prediction:} Predict which way branches will go
+        \item \textbf{Speculative Execution:} Execute ahead speculatively
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{ARM vs x86: Performance and Power Comparison}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{ARM Strengths:}
+\begin{itemize}
+    \item \textbf{Power Efficiency:} 3-5x better performance per watt
+    \item \textbf{Heat Generation:} Runs cooler, enables fanless designs
+    \item \textbf{Battery Life:} Exceptional in mobile devices
+    \item \textbf{Custom Silicon:} Licensees can customize designs
+    \item \textbf{Cost:} Lower licensing and manufacturing costs
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{x86 Strengths:}
+\begin{itemize}
+    \item \textbf{Raw Performance:} Higher peak performance in many workloads
+    \item \textbf{Software Ecosystem:} Decades of optimized software
+    \item \textbf{Enterprise Features:} Advanced virtualization, security
+    \item \textbf{Backward Compatibility:} Runs legacy software unchanged
+    \item \textbf{Manufacturing:} Advanced process nodes (Intel, TSMC)
+\end{itemize}
+\end{column}
+\end{columns}
+\begin{itemize}
+    \item \textbf{Current Trend:} ARM gaining ground in servers and laptops, x86 still dominant in desktop/enterprise
+    \item \textbf{Future:} Likely convergence with both architectures borrowing from each other
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Real-World Applications: Choosing the Right Architecture}
+\begin{itemize}
+    \item \textbf{ARM Dominates:}
+    \begin{itemize}
+        \item \textbf{Mobile Devices:} Smartphones, tablets (95\% market share)
+        \item \textbf{IoT/Embedded:} Sensors, smart devices, automotive
+        \item \textbf{Apple Ecosystem:} M1/M2 MacBooks, iPhones, iPads
+        \item \textbf{Cloud Computing:} Amazon Graviton, custom server chips
+    \end{itemize}
+    \item \textbf{x86 Dominates:}
+    \begin{itemize}
+        \item \textbf{Desktop/Laptop PCs:} Gaming, productivity, development
+        \item \textbf{Enterprise Servers:} Data centers, high-performance computing
+        \item \textbf{Legacy Systems:} Existing infrastructure and software
+        \item \textbf{High-End Gaming:} Maximum performance requirements
+    \end{itemize}
+    \item \textbf{Decision Factors:}
+    \begin{itemize}
+        \item Power efficiency vs raw performance
+        \item Software compatibility requirements
+        \item Cost constraints and development timeline
+        \item Target market and use case
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}  
+    \frametitle{The Von Neumann Architecture}
+\begin{itemize}
+    \item \textbf{The Von Neumann Architecture:} The core model of a modern computer.
+    \begin{itemize}
+        \item Central Processing Unit (CPU): The "brain."
+        \item Main Memory (RAM): The workspace.
+        \item Input/Output (I/O) Systems.
+    \end{itemize}
+    \item \textbf{A Deeper Look at the CPU:}
+    \begin{itemize}
+        \item Control Unit (CU), Arithmetic Logic Unit (ALU), Registers.
+    \end{itemize}
+    \item \textbf{The Memory Hierarchy:} A pyramid of speed, cost, and size.
+    \begin{itemize}
+        \item \textbf{L1/L2/L3 Cache:} Ultra-fast memory on the CPU.
+        \item \textbf{RAM (Random Access Memory):} Volatile, fast memory for active programs.
+        \item \textbf{Permanent Storage:} Non-volatile, slower storage (SSDs, HDDs).
+    \end{itemize}
+\end{itemize}
+\end{frame}  
+

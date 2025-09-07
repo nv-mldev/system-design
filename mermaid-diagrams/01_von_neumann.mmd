@@ -1,8 +1,8 @@
 graph TD
     subgraph Computer
-        CPU -- "fetches/stores" --> Memory;
-        CPU -- "reads/writes" --> IO_Devices;
-        IO_Devices -- "data" --> Memory;
+        CPU -- "fetches/stores" <--> Memory;
+        CPU -- "reads/writes" <--> IO_Devices;
+        IO_Devices -- "data" <--> Memory;
     end
     CPU <--> CU & ALU & Registers;
     subgraph IO_Devices

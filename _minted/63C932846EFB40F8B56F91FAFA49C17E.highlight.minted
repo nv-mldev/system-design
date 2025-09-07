@@ -1,0 +1,7 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+GET\PYG{+w}{    }/authors\PYG{+w}{                    }\PYG{c+c1}{\PYGZsh{} List all authors}
+GET\PYG{+w}{    }/authors/1\PYG{+w}{                  }\PYG{c+c1}{\PYGZsh{} Get specific author}
+POST\PYG{+w}{   }/authors\PYG{+w}{                    }\PYG{c+c1}{\PYGZsh{} Create author}
+GET\PYG{+w}{    }/books?author\PYGZus{}id\PYG{o}{=}\PYG{l+m}{1}\PYG{+w}{          }\PYG{c+c1}{\PYGZsh{} Get books by author}
+GET\PYG{+w}{    }/customers/1/orders\PYG{+w}{         }\PYG{c+c1}{\PYGZsh{} Get customer orders}
+\end{MintedVerbatim}

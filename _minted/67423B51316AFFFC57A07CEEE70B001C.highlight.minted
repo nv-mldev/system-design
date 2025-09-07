@@ -1,0 +1,18 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+api\PYGZus{}comparison/
+├── shared/                    \PYGZsh{} Shared components
+│   ├── models.py             \PYGZsh{} Data models (Author, Book, Customer, Order)
+│   └── database.py           \PYGZsh{} Mock in\PYGZhy{}memory database with sample data
+├── rest\PYGZus{}api/                 \PYGZsh{} Traditional REST API
+│   └── app.py                \PYGZsh{} Flask server with CRUD endpoints
+├── graphql\PYGZus{}api/              \PYGZsh{} Modern GraphQL API
+│   ├── schema.py             \PYGZsh{} GraphQL schema, types, and resolvers
+│   └── app.py                \PYGZsh{} FastAPI + Strawberry GraphQL server
+├── client\PYGZus{}examples/          \PYGZsh{} Demonstration clients
+│   ├── rest\PYGZus{}client.py        \PYGZsh{} Shows REST API problems
+│   ├── graphql\PYGZus{}client.py     \PYGZsh{} Shows GraphQL solutions
+│   └── compare\PYGZus{}apis.py       \PYGZsh{} Side\PYGZhy{}by\PYGZhy{}side comparison
+├── requirements.txt          \PYGZsh{} Python dependencies
+├── start\PYGZus{}servers.sh          \PYGZsh{} Convenient startup script
+└── README.md                 \PYGZsh{} This file
+\end{MintedVerbatim}

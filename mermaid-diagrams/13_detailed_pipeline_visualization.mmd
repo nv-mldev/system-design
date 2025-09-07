@@ -1,0 +1,62 @@
+
+flowchart TD
+    Start([Instruction Starts]) --> IF[Instruction Fetch<br/>Cycle 1]
+    
+    IF --> IF_Details{{"🔍 Fetch Details"}}
+    IF_Details --> IF1["1. PC → Memory Address"]
+    IF_Details --> IF2["2. Memory → Instruction"]
+    IF_Details --> IF3["3. Instruction → IR"]
+    IF1 --> ID
+    IF2 --> ID
+    IF3 --> ID
+    
+    ID[Instruction Decode<br/>Cycle 2] --> ID_Details{{"⚙️ Decode Details"}}
+    ID_Details --> ID1["1. Analyze Opcode"]
+    ID_Details --> ID2["2. Identify Operands"]
+    ID_Details --> ID3["3. Read Registers"]
+    ID1 --> EX
+    ID2 --> EX
+    ID3 --> EX
+    
+    EX[Execute<br/>Cycle 3] --> EX_Type{"Instruction Type?"}
+    
+    EX_Type -->|Arithmetic/Logic| ALU["ALU Operation<br/>ADD, SUB, AND, OR"]
+    EX_Type -->|Memory Access| ADDR["Address Calculation<br/>Base + Offset"]
+    EX_Type -->|Branch/Jump| BRANCH["Condition Check<br/>Target Address Calc"]
+    
+    ALU --> MEM_Decision{"Memory Access<br/>Required?"}
+    ADDR --> MEM
+    BRANCH --> PC_Update["Update PC<br/>(if branch taken)"]
+    
+    MEM_Decision -->|No| WB
+    MEM_Decision -->|Yes| MEM[Memory Access<br/>Cycle 4]
+    
+    MEM --> MEM_Type{"Memory Operation?"}
+    MEM_Type -->|Load| READ["Read from Memory<br/>Memory → Data"]
+    MEM_Type -->|Store| WRITE["Write to Memory<br/>Data → Memory"]
+    
+    READ --> WB
+    WRITE --> WB
+    PC_Update --> Complete
+    
+    WB[Write Back<br/>Cycle 5] --> WB_Details{{"📝 Writeback Details"}}
+    WB_Details --> WB1["1. Result → Register"]
+    WB_Details --> WB2["2. Update Status Flags"]
+    WB_Details --> WB3["3. Increment PC"]
+    
+    WB1 --> Complete
+    WB2 --> Complete
+    WB3 --> Complete
+    
+    Complete[Instruction Complete] --> NextInst["Next Instruction<br/>Begins Cycle 1"]
+    
+    %% Styling
+    classDef cycleBox fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef detailBox fill:#f3e5f5,stroke:#4a148c,stroke-width:1px
+    classDef decisionBox fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef processBox fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    
+    class IF,ID,EX,MEM,WB cycleBox
+    class IF_Details,ID_Details,WB_Details detailBox
+    class EX_Type,MEM_Decision,MEM_Type decisionBox
+    class ALU,ADDR,BRANCH,READ,WRITE,PC_Update processBox

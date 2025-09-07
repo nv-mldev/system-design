@@ -1,0 +1,31 @@
+```mermaid
+flowchart TD
+    Start([Different Instructions,<br/>Different Cycle Counts])
+    
+    Start --> Simple["Simple Register Operation<br/>ADD R1, R2, R3"]
+    Start --> Memory["Memory Load Operation<br/>LOAD R1, [Memory_Address]"]
+    Start --> Complex["Complex Operation<br/>DIVIDE R1, R2"]
+    
+    Simple --> Simple_Cycles["📊 3-4 Cycles<br/>• Fetch: 1 cycle<br/>• Decode: 1 cycle<br/>• Execute: 1 cycle<br/>• Writeback: 1 cycle"]
+    
+    Memory --> Memory_Cycles["📊 4-5 Cycles<br/>• Fetch: 1 cycle<br/>• Decode: 1 cycle<br/>• Address Calc: 1 cycle<br/>• Memory Access: 1-2 cycles<br/>• Writeback: 1 cycle"]
+    
+    Complex --> Complex_Cycles["📊 10-40 Cycles<br/>• Fetch: 1 cycle<br/>• Decode: 1 cycle<br/>• Execute: 8-38 cycles<br/>• Writeback: 1 cycle"]
+    
+    Simple_Cycles --> Factors
+    Memory_Cycles --> Factors
+    Complex_Cycles --> Factors
+    
+    Factors["⚡ Factors Affecting Cycle Count<br/><br/>1. Memory latency (cache hits/misses)<br/>2. Instruction complexity<br/>3. Data dependencies<br/>4. Branch predictions<br/>5. Pipeline stalls<br/>6. Floating-point operations"]
+    
+    %% Styling
+    classDef simpleStyle fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef memoryStyle fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef complexStyle fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef factorStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    
+    class Simple,Simple_Cycles simpleStyle
+    class Memory,Memory_Cycles memoryStyle
+    class Complex,Complex_Cycles complexStyle
+    class Factors factorStyle
+```

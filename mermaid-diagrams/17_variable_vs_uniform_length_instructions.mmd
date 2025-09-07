@@ -1,0 +1,66 @@
+```mermaid
+flowchart TD
+    Title["🎯 Instruction Length: Architecture Design Choice"]
+    
+    Title --> RISC_Side["🏃 RISC: Uniform Instructions"]
+    Title --> CISC_Side["🏗️ CISC: Variable-Length Instructions"]
+    
+    %% RISC Side
+    RISC_Side --> RISC_Example["📏 All Instructions = 32 bits<br/><br/>ADD R1, R2, R3    ← 32 bits<br/>SUB R4, R5, R6    ← 32 bits<br/>LOAD R7, [R8]     ← 32 bits<br/>STORE R9, [R10]   ← 32 bits"]
+    
+    RISC_Example --> RISC_Benefits["✅ RISC Benefits"]
+    RISC_Benefits --> RB1["🎯 Predictable Fetch:<br/>Next instruction always<br/>at CurrentPC + 4"]
+    RISC_Benefits --> RB2["⚡ Fast Decode:<br/>Fixed instruction format<br/>enables parallel decode"]
+    RISC_Benefits --> RB3["🔄 Efficient Pipeline:<br/>No variable-length stalls<br/>Better branch prediction"]
+    RISC_Benefits --> RB4["🧠 Simple Control Logic:<br/>Reduced complexity<br/>Higher clock speeds"]
+    
+    %% CISC Side  
+    CISC_Side --> CISC_Example["📏 Variable Instruction Sizes<br/><br/>MOV AL, 42         ← 2 bytes<br/>ADD EAX, EBX       ← 2 bytes<br/>MOV EAX, [EBP+8]   ← 3 bytes<br/>IMUL EAX, [ESI+4], 10 ← 6 bytes<br/>REP MOVSB          ← 2 bytes<br/>CALL DWORD PTR [EAX+8] ← 6 bytes"]
+    
+    CISC_Example --> CISC_Benefits["✅ CISC Benefits"]
+    CISC_Benefits --> CB1["💾 Code Density:<br/>More functionality<br/>per instruction"]
+    CISC_Benefits --> CB2["🎪 Complex Operations:<br/>Single instruction can<br/>do multiple operations"]
+    CISC_Benefits --> CB3["📦 Smaller Programs:<br/>Fewer instructions needed<br/>for same functionality"]
+    
+    CISC_Example --> CISC_Challenges["❌ CISC Challenges"]
+    CISC_Challenges --> CC1["🐌 Variable Fetch Time:<br/>Don't know instruction length<br/>until partially decoded"]
+    CISC_Challenges --> CC2["🧩 Complex Decode:<br/>Multiple decode cycles<br/>for complex instructions"]
+    CISC_Challenges --> CC3["⚠️ Pipeline Complexity:<br/>Variable timing makes<br/>pipelining difficult"]
+    
+    %% Comparison Section
+    RB4 --> Comparison["⚖️ Architecture Trade-offs"]
+    CC3 --> Comparison
+    
+    Comparison --> Trade1["🏃 RISC Philosophy:<br/>Simple instructions, fast execution<br/>More instructions, predictable timing"]
+    Comparison --> Trade2["🏗️ CISC Philosophy:<br/>Complex instructions, versatile execution<br/>Fewer instructions, variable timing"]
+    
+    %% Technical Details
+    Trade1 --> TechRISC["🔧 RISC Technical Details"]
+    TechRISC --> TR1["• Fixed 32-bit encoding<br/>• Immediate operands limited<br/>• Simple addressing modes<br/>• Load/Store architecture"]
+    
+    Trade2 --> TechCISC["🔧 CISC Technical Details"]  
+    TechCISC --> TC1["• 1-15 byte instructions (x86)<br/>• Complex addressing modes<br/>• Memory-to-memory operations<br/>• Variable operand encoding"]
+    
+    %% Modern Impact
+    TR1 --> Modern["🚀 Modern Impact"]
+    TC1 --> Modern
+    
+    Modern --> M1["📱 ARM (RISC): Dominates mobile<br/>Power efficiency crucial"]
+    Modern --> M2["💻 x86 (CISC): Still strong in desktop/server<br/>Backward compatibility important"]
+    Modern --> M3["🔄 Hybrid Approaches:<br/>CISC instructions → RISC μ-ops<br/>Best of both worlds"]
+    
+    %% Styling
+    classDef riscStyle fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef ciscStyle fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef benefitStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef challengeStyle fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef comparisonStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef modernStyle fill:#f1f8e9,stroke:#558b2f,stroke-width:2px
+    
+    class RISC_Side,RISC_Example,RB1,RB2,RB3,RB4,TechRISC,TR1 riscStyle
+    class CISC_Side,CISC_Example,CB1,CB2,CB3,TechCISC,TC1 ciscStyle
+    class RISC_Benefits,CISC_Benefits benefitStyle
+    class CISC_Challenges,CC1,CC2,CC3 challengeStyle
+    class Comparison,Trade1,Trade2 comparisonStyle
+    class Modern,M1,M2,M3 modernStyle
+```
