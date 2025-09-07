@@ -1,0 +1,12 @@
+graph TD
+    subgraph Computer
+        CPU -- "fetches/stores" --> Memory;
+        CPU -- "reads/writes" --> IO_Devices;
+        IO_Devices -- "data" --> Memory;
+    end
+    CPU <--> CU & ALU & Registers;
+    subgraph IO_Devices
+        direction LR
+        Input_Device --> CPU;
+        CPU --> Output_Device;
+    end

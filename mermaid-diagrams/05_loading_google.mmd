@@ -1,0 +1,18 @@
+ sequenceDiagram
+    participant User
+    participant Browser
+    participant OS
+    participant Router
+    participant DNS_Server
+    participant Google_Server
+
+    User->>Browser: Enters "google.com"
+    Browser->>OS: Need IP for "google.com"
+    OS->>Router: DNS Query
+    Router->>DNS_Server: Where is "google.com"?
+    DNS_Server-->>Router: IP is 142.250.190.78
+    Router-->>OS: Here is the IP
+    OS-->>Browser: Here is the IP
+    Browser->>Google_Server: HTTP GET request to 142.250.190.78
+    Google_Server-->>Browser: HTTP 200 OK (sends webpage)
+    Browser->>User: Renders the webpage

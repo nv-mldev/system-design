@@ -1,0 +1,10 @@
+graph TD
+    subgraph Message Queue
+        Producer -- "Message" --> Queue((Queue));
+        Queue -- "Message" --> Consumer;
+    end
+    subgraph Publish-Subscribe
+        Publisher -- "Topic A" --> Broker((Topic));
+        Broker -- "Topic A" --> Subscriber1;
+        Broker -- "Topic A" --> Subscriber2;
+    end

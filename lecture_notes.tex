@@ -1,0 +1,716 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{titling}
+
+\geometry{a4paper, margin=1in}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\title{System Integration and Networking Lecture Notes}
+\author{Compiled from Project Documents}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Course Outline: An Introduction to System Integration}
+This document outlines a short course designed to introduce our software team to the fundamental concepts of system integration, from single-computer architecture to networked systems.
+
+\subsection{Chapter 1: The Heart of the Machine - Computer Architecture Fundamentals}
+\subsubsection{Objective}
+Understand the primary components of a single computer and how they interact.
+
+\subsubsection{Topics}
+\begin{itemize}
+    \item \textbf{The Von Neumann Architecture:} The core model of a modern computer.
+    \begin{itemize}
+        \item Central Processing Unit (CPU): The "brain."
+        \item Main Memory (RAM): The workspace.
+        \item Input/Output (I/O) Systems.
+    \end{itemize}
+    \item \textbf{A Deeper Look at the CPU:}
+    \begin{itemize}
+        \item Control Unit (CU), Arithmetic Logic Unit (ALU), Registers.
+    \end{itemize}
+    \item \textbf{The Memory Hierarchy:} A pyramid of speed, cost, and size.
+    \begin{itemize}
+        \item \textbf{L1/L2/L3 Cache:} Ultra-fast memory on the CPU.
+        \item \textbf{RAM (Random Access Memory):} Volatile, fast memory for active programs.
+        \item \textbf{Permanent Storage:} Non-volatile, slower storage (SSDs, HDDs).
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Visualizations \& Diagrams}
+\textbf{Von Neumann Architecture:}
+\begin{minted}{mermaid}
+graph TD
+    subgraph Computer
+        CPU -- "fetches/stores" --> Memory;
+        CPU -- "reads/writes" --> IO_Devices;
+        IO_Devices -- "data" --> Memory;
+    end
+    CPU <--> CU & ALU & Registers;
+    subgraph IO_Devices
+        direction LR
+        Input_Device --> CPU;
+        CPU --> Output_Device;
+    end
+\end{minted}
+
+\textbf{Memory Hierarchy:}
+\begin{minted}{mermaid}
+graph TD
+    A[CPU Registers] --> B(L1 Cache);
+    B --> C(L2 Cache);
+    C --> D(L3 Cache);
+    D --> E(Main Memory - RAM);
+    E --> F(Permanent Storage - SSD/HDD);
+\end{minted}
+
+\subsubsection{Real-World Application}
+\textbf{Launching an Application:} When you double-click an icon for a program (e.g., a web browser), the OS finds the program on your \textbf{Permanent Storage (SSD)} and loads it into \textbf{Main Memory (RAM)}. The \textbf{CPU} then fetches instructions and data from RAM into its \textbf{Caches} to execute the program, drawing the user interface on your screen via an \textbf{Output Device}.
+
+\subsubsection{References \& Further Reading}
+\begin{itemize}
+    \item \textbf{Video:} Crash Course Computer Science - The CPU: \url{https://www.youtube.com/watch?v=cNN_tTXABUA}
+    \item \textbf{Article:} "How Computers Work: The CPU and Memory" by Code.org: \url{https://code.org/files/curriculum/course4/10_HowComputersWork.pdf}
+\end{itemize}
+
+\subsection{Chapter 2: Processing in Parallel - Advanced CPU Architectures}
+\subsubsection{Objective}
+Explore how modern processors handle multiple tasks and data streams simultaneously.
+
+\subsubsection{Topics}
+\begin{itemize}
+    \item \textbf{Introduction to Flynn's Taxonomy:} A classification of computer architectures.
+    \item \textbf{SIMD (Single Instruction, Multiple Data):} One instruction applied to many data points.
+    \item \textbf{MIMD (Multiple Instruction, Multiple Data):} Multiple instructions on multiple data streams.
+\end{itemize}
+
+\subsubsection{Visualizations \& Diagrams}
+\begin{minted}{mermaid}
+graph TD
+    subgraph SIMD
+        direction LR
+        Instruction_SIMD --> Data1;
+        Instruction_SIMD --> Data2;
+        Instruction_SIMD --> Data3;
+    end
+    subgraph MIMD
+        direction LR
+        Instruction1_MIMD --> DataA;
+        Instruction2_MIMD --> DataB;
+        Instruction3_MIMD --> DataC;
+    end
+\end{minted}
+
+\subsubsection{Real-World Application}
+\begin{itemize}
+    \item \textbf{SIMD:} Applying a brightness filter in a photo editor. The \textit{same instruction} ("increase brightness by 10\%") is applied to \textit{every pixel} in the image (multiple data) at once, often by the GPU.
+    \item \textbf{MIMD:} A modern web server handling requests from three different users simultaneously. One core (or thread) processes User A's request for a profile page, a second core processes User B's file upload, and a third processes User C's database query. Each is a different instruction on different data.
+\end{itemize}
+
+\subsubsection{References \& Further Reading}
+\begin{itemize}
+    \item \textbf{Video:} Flynn's Taxonomy Explained: \url{https://www.youtube.com/watch?v=1OLAl9M7pmE}
+    \item \textbf{Image:} A visual of SIMD vs MIMD: \url{https://www.researchgate.net/profile/Jose-Gracia/publication/273764335/figure/fig1/AS:669459278868483@1536622952381/Illustration-of-the-SIMD-and-MIMD-parallel-computing-paradigms.png}
+\end{itemize}
+
+\subsection{Chapter 3: Connecting the Dots - Network Architectures and Layers}
+\subsubsection{Objective}
+Understand how different computer systems communicate with each other over a network.
+
+\subsubsection{Topics}
+\begin{itemize}
+    \item \textbf{The Need for Layers:} Simplifying complexity through abstraction.
+    \item \textbf{The TCP/IP Model (A 5-Layer View):} Application, Transport, Network, Data Link, Physical.
+\end{itemize}
+
+\subsubsection{Visualizations \& Diagrams}
+\begin{minted}{mermaid}
+graph TD
+    subgraph Your Computer
+        A[Application Layer - HTTP] --> B(Transport Layer - TCP);
+        B --> C(Network Layer - IP);
+        C --> D(Data Link Layer - WiFi/Ethernet);
+        D --> E(Physical Layer - Radio Waves/Cables);
+    end
+    subgraph Web Server
+        F[Application Layer - HTTP] --> G(Transport Layer - TCP);
+        G --> H(Network Layer - IP);
+        H --> I(Data Link Layer - Ethernet);
+        I --> J(Physical Layer - Cables);
+    end
+    E -- The Internet --> J;
+\end{minted}
+
+\subsubsection{Real-World Application}
+\textbf{Ordering a Pizza Online:}
+\begin{itemize}
+    \item \textbf{Application:} You use a web browser (HTTP) to place an order.
+    \item \textbf{Transport:} TCP breaks your order into numbered packets to ensure the restaurant gets all the details correctly.
+    \item \textbf{Network:} IP puts the restaurant's address on each packet.
+    \item \textbf{Data Link:} Your Wi-Fi sends the packets to your router.
+    \item \textbf{Physical:} The actual radio waves carry the data.
+\end{itemize}
+The restaurant's server receives the data in reverse order.
+
+\subsubsection{References \& Further Reading}
+\begin{itemize}
+    \item \textbf{Video:} The OSI Model Explained: \url{https://www.youtube.com/watch?v=vv4y_uOneC0} (Closely related to TCP/IP).
+    \item \textbf{Article:} "How TCP/IP Works" by HowStuffWorks: \url{https://computer.howstuffworks.com/tcp-ip.htm}
+\end{itemize}
+
+\subsection{Chapter 4: Tying It All Together - A Practical Example}
+\subsubsection{Objective}
+Trace a single, common action from start to finish to see how all the concepts interact.
+
+\subsubsection{Scenario}
+"Loading \texttt{google.com} in a web browser."
+
+\subsubsection{Visualizations \& Diagrams}
+\begin{minted}{mermaid}
+ sequenceDiagram
+    participant User
+    participant Browser
+    participant OS
+    participant Router
+    participant DNS_Server
+    participant Google_Server
+
+    User->>Browser: Enters "google.com"
+    Browser->>OS: Need IP for "google.com"
+    OS->>Router: DNS Query
+    Router->>DNS_Server: Where is "google.com"?
+    DNS_Server-->>Router: IP is 142.250.190.78
+    Router-->>OS: Here is the IP
+    OS-->>Browser: Here is the IP
+    Browser->>Google_Server: HTTP GET request to 142.250.190.78
+    Google_Server-->>Browser: HTTP 200 OK (sends webpage)
+    Browser->>User: Renders the webpage
+\end{minted}
+
+\subsubsection{References \& Further Reading}
+\begin{itemize}
+    \item \textbf{Article:} "What happens when you type google.com into your browser's address box and press enter?" - A classic, detailed explanation: \url{https://github.com/alex/what-happens-when}
+    \item \textbf{Tool:} Visual Trace Route tools like \texttt{mtr} (command line) or online versions can show the network path packets take.
+\end{itemize}
+
+\subsection{Chapter 5: Network Communication Patterns}
+\subsubsection{Objective}
+Explore common methods and patterns for communication between systems.
+
+\subsubsection{Topics}
+\begin{itemize}
+    \item \textbf{HTTP Communication:} Request/Response model.
+    \item \textbf{Sockets:} Low-level, bidirectional communication.
+    \item \textbf{Web Servers:} The role of servers like Nginx.
+    \item \textbf{Message Queues:} Decoupling systems.
+    \item \textbf{Publish-Subscribe Pattern:} Scalable messaging.
+\end{itemize}
+
+\subsubsection{Visualizations \& Diagrams}
+\begin{minted}{mermaid}
+graph TD
+    subgraph Message Queue
+        Producer -- "Message" --> Queue((Queue));
+        Queue -- "Message" --> Consumer;
+    end
+    subgraph Publish-Subscribe
+        Publisher -- "Topic A" --> Broker((Topic));
+        Broker -- "Topic A" --> Subscriber1;
+        Broker -- "Topic A" --> Subscriber2;
+    end
+\end{minted}
+
+\subsubsection{Real-World Application}
+\begin{itemize}
+    \item \textbf{Message Queue:} An e-commerce site. When you place an order, the web server (Producer) doesn't handle payment, shipping, and email all at once. It just puts an "Order Placed" message onto a \textbf{Queue}. Separate services (Consumers) for payment, inventory, and notifications pick up the message and do their work independently. This makes the checkout process fast and reliable.
+    \item \textbf{Publish-Subscribe:} A live sports app. A central service (Publisher) publishes score updates to a "game-123" topic. Thousands of users (Subscribers) who are following that game receive the updates in real-time.
+\end{itemize}
+
+\subsubsection{References \& Further Reading}
+\begin{itemize}
+    \item \textbf{Video:} What is a Message Queue?: \url{https://www.youtube.com/watch?v=rYw_cNJ2YpE}
+    \item \textbf{Article:} "Understanding Publish/Subscribe Messaging" by AWS: \url{https://aws.amazon.com/pub-sub-messaging/}
+\end{itemize}
+
+\subsection{Chapter 6: Concurrency and Parallelism}
+\subsubsection{Objective}
+Understand different models for executing multiple tasks at the same time.
+
+\subsubsection{Topics}
+\begin{itemize}
+    \item \textbf{Concurrent Processing (Threads):} Independent execution paths in one process.
+    \item \textbf{Parallel Processing:} Simultaneous execution on multiple cores.
+    \item \textbf{Asynchronous Processing (Async):} Non-blocking operations.
+\end{itemize}
+
+\subsubsection{Visualizations \& Diagrams}
+
+\begin{minted}{mermaid}
+graph TD
+    subgraph Concurrency (1 Core)
+        direction LR
+        Core1 -- "Task A (part 1)" --> CtxSwitch1(Switch);
+        CtxSwitch1 -- "Task B (part 1)" --> CtxSwitch2(Switch);
+        CtxSwitch2 -- "Task A (part 2)" --> Continue["..."];
+    end
+    subgraph Parallelism (2 Cores)
+        direction LR
+        CoreA -- "Task A (all)" --> DoneA;
+        CoreB -- "Task B (all)" --> DoneB;
+    end
+\end{minted}
+
+\subsubsection{Real-World Application}
+\begin{itemize}
+    \item \textbf{Concurrency (Threads):} In a word processor, one thread accepts your typing while another thread in the background is constantly checking your spelling and grammar. It feels simultaneous, but the CPU is rapidly switching between the two tasks.
+    \item \textbf{Parallelism:} Rendering a 3D animated movie. The job is split up so that each CPU core (or even different machines) renders a different frame at the exact same time.
+    \item \textbf{Asynchronous:} A web server loading data from a database. Instead of freezing while it waits for the database query to return, it starts the query and then immediately goes on to handle other user requests. When the data is ready, it picks up where it left off.
+\end{itemize}
+
+\subsubsection{References \& Further Reading}
+\begin{itemize}
+    \item \textbf{Video:} Concurrency vs Parallelism: \url{https://www.youtube.com/watch?v=lK4oge36T-s}
+    \item \textbf{Article:} "Async IO Explained": \url{https://www.ably.com/blog/async-io-explained}
+\end{itemize}
+
+\subsection{Chapter 7: Operating System Fundamentals}
+\subsubsection{Objective}
+Gain a foundational understanding of the role of the Operating System.
+
+\subsubsection{Topics}
+\begin{itemize}
+    \item \textbf{Core Functions:} Process management, memory management, file systems, I/O.
+    \item \textbf{Windows vs. Linux:} High-level comparison.
+    \item \textbf{Hyper-Threading:} A single physical core acting as two virtual cores.
+\end{itemize}
+
+\subsubsection{Visualizations \& Diagrams}
+\begin{minted}{mermaid}
+graph TD
+    subgraph OS Kernel
+        direction LR
+        Scheduler --> P1(Process 1);
+        Scheduler --> P2(Process 2);
+        MemoryManager -- "allocates" --> P1_Mem[Memory for P1];
+        MemoryManager -- "allocates" --> P2_Mem[Memory for P2];
+    end
+    subgraph Hardware
+        CPU & RAM & Disk;
+    end
+    P1 & P2 -- "run on" --> CPU;
+    P1_Mem & P2_Mem -- "reside in" --> RAM;
+    OS_Kernel -- "manages" --> Hardware;
+\end{minted}
+
+\subsubsection{Real-World Application}
+\textbf{Process Management:} You can have a web browser, a music player, and a code editor all running at the same time. The OS \textbf{Scheduler} rapidly switches the CPU's attention between them, giving each a slice of time so they all appear to run simultaneously. The \textbf{Memory Manager} ensures the browser can't accidentally read data from your code editor, providing stability and security.
+
+\subsubsection{References \& Further Reading}
+\begin{itemize}
+    \item \textbf{Video:} Crash Course Computer Science - Operating Systems: \url{https://www.youtube.com/watch?v=26QPDBe-NB8}
+    \item \textbf{Article:} "What is an Operating System?" by FreeCodeCamp: \url{https://www.freecodecamp.org/news/what-is-an-operating-system-definition-for-beginners/}
+\end{itemize}
+
+\subsection{Chapter 8: Virtualization and Isolation}
+\subsubsection{Objective}
+Understand how we create virtual environments to run software.
+
+\subsubsection{Topics}
+\begin{itemize}
+    \item \textbf{Virtual Machines (VMs):} Emulating an entire computer system.
+    \item \textbf{Containers:} OS-level virtualization (e.g., Docker).
+    \item \textbf{VMs vs. Containers:} Key differences.
+\end{itemize}
+
+\subsubsection{Visualizations \& Diagrams}
+\begin{minted}{mermaid}
+graph TD
+    subgraph Physical Server
+        direction TB
+        HW[Hardware] --> HostOS[Host OS];
+
+        subgraph VM Approach
+            HostOS --> Hypervisor;
+            Hypervisor --> GuestOS_A[Guest OS A];
+            Hypervisor --> GuestOS_B[Guest OS B];
+            GuestOS_A --> App_A;
+            GuestOS_B --> App_B;
+        end
+
+        subgraph Container Approach
+            HostOS --> ContainerEngine[Container Engine];
+            ContainerEngine --> App_C;
+            ContainerEngine --> App_D;
+        end
+    end
+\end{minted}
+
+\subsubsection{Real-World Application}
+\begin{itemize}
+    \item \textbf{Virtual Machine:} A developer on a Mac needs to test their website on Internet Explorer. They can run a \textbf{Windows VM} on their Mac. This VM contains a full, separate copy of the Windows operating system, allowing them to run IE as if they were on a native Windows PC.
+    \item \textbf{Container:} A team builds a microservice that requires Python 3.9 and a specific database library. They package the service and its dependencies into a \textbf{Docker container}. Now, any developer can run that container on their machine (Windows, Mac, or Linux) and it will work identically, because the container provides the exact environment the application needs, without needing a whole separate guest OS.
+\end{itemize}
+
+\subsubsection{References \& Further Reading}
+\begin{itemize}
+    \item \textbf{Video:} Containers vs VMs: What's the Difference?: \url{https://www.youtube.com/watch?v=cjXI-A-4854}
+    \item \textbf{Article:} "What is a Container?" by Docker: \url{https://www.docker.com/resources/what-container/}
+\end{itemize}
+
+\newpage
+\section{Networking Essentials for System Design}
+This document provides a summary of key networking concepts that are essential for system design interviews, based on the provided video transcript.
+
+\subsection{The OSI Model and Networking Basics}
+Networking is often conceptualized as a layered cake, where each layer provides a level of abstraction and builds upon the one below it. For system design interviews, we are primarily concerned with three of these layers:
+\begin{itemize}
+    \item \textbf{Layer 3: The Network Layer:} This is where protocols like \textbf{IP} (Internet Protocol) live. It's responsible for addressing and routing packets across the network.
+    \item \textbf{Layer 4: The Transport Layer:} This layer includes protocols like \textbf{TCP} and \textbf{UDP}, which provide services like guaranteed delivery and ordering.
+    \item \textbf{Layer 7: The Application Layer:} This is the top layer, featuring protocols that developers interact with directly, such as \textbf{HTTP}, \textbf{WebSockets}, and \textbf{gRPC}.
+\end{itemize}
+These layers work together. For example, an HTTP request (Layer 7) is transmitted over a TCP connection (Layer 4), which in turn uses IP addresses (Layer 3) to route the data. This layering creates overhead and latency, especially during connection setup (e.g., the TCP three-way handshake), which is an important consideration in system design.
+
+\subsection{Layer 3: The Network Layer (IP)}
+The \textbf{Internet Protocol (IP)} is responsible for giving usable names (addresses) to nodes on a network and allowing for routing.
+\begin{itemize}
+    \item \textbf{IPv4 vs. IPv6:}
+    \begin{itemize}
+        \item \textbf{IPv4:} 4-byte addresses. We have run out of these.
+        \item \textbf{IPv6:} 16-byte addresses. More modern and plentiful.
+        \item Typically, you'll use IPv4 for external-facing services for compatibility and IPv6 internally.
+    \end{itemize}
+    \item \textbf{Public vs. Private IP Addresses:}
+    \begin{itemize}
+        \item \textbf{Public IPs:} Globally unique and routable on the public internet. Assigned by a central authority. Used for your API gateways, load balancers, and other externally facing components.
+        \item \textbf{Private IPs:} Used within a private network (e.g., your home network or a VPC in the cloud). Not routable on the public internet. Used for all your internal microservices and hosts.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Layer 4: The Transport Layer (TCP, UDP, QUIC)}
+The transport layer provides important functionality on top of IP.
+\begin{itemize}
+    \item \textbf{TCP (Transmission Control Protocol):}
+    \begin{itemize}
+        \item The \textbf{default} choice for most applications.
+        \item Provides \textbf{guaranteed delivery} and \textbf{ordering} of packets using sequence numbers and acknowledgements.
+        \item It's reliable, but this reliability comes at the cost of higher latency and lower throughput, as lost packets must be retransmitted.
+    \end{itemize}
+    \item \textbf{UDP (User Datagram Protocol):}
+    \begin{itemize}
+        \item Offers higher performance (lower latency, higher throughput) by sacrificing the guarantees of TCP.
+        \item It's a "fire and forget" protocol. Packets can be lost or arrive out of order.
+        \item \textbf{Use cases:} Real-time applications where latency is critical and some data loss is acceptable, such as:
+        \begin{itemize}
+            \item Video and audio conferencing
+            \item Multiplayer gaming
+            \item Live streaming
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{QUIC:} A more modern transport protocol built on top of UDP that aims to provide the reliability of TCP with lower latency. It's increasingly used for web traffic.
+\end{itemize}
+
+\subsection{Layer 7: The Application Layer}
+This is where most of the application-level logic and protocols reside.
+
+\subsubsection{HTTP and REST}
+\begin{itemize}
+    \item \textbf{HTTP (Hypertext Transfer Protocol):} The most popular application layer protocol. It uses a simple text-based request/response model.
+    \begin{itemize}
+        \item \textbf{Requests} include a method (verb) like \texttt{GET}, \texttt{POST}, \texttt{PUT}, \texttt{DELETE}, a URL, and headers.
+        \item \textbf{Responses} include a status code (e.g., \texttt{200 OK}, \texttt{404 Not Found}), headers, and a body.
+        \item \textbf{Content Negotiation:} Clients and servers use headers to negotiate content types, encodings, etc., which makes HTTP highly flexible and extensible.
+    \end{itemize}
+    \item \textbf{REST (Representational State Transfer):} The most common architectural style for building APIs on top of HTTP.
+    \begin{itemize}
+        \item It's organized around \textbf{resources} (identified by URLs) and \textbf{verbs} (HTTP methods).
+        \item Example: To get user 1, you would make a \texttt{GET} request to \texttt{/users/1}. To create a new user, you would \texttt{POST} to \texttt{/users}.
+        \item REST is the default choice for building APIs in system design interviews due to its simplicity, scalability, and wide adoption.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{GraphQL}
+GraphQL is a query language for APIs that provides an alternative to REST.
+\begin{itemize}
+    \item \textbf{Problem it solves:}
+    \begin{itemize}
+        \item \textbf{Under-fetching:} When a single API endpoint doesn't provide enough data, requiring the client to make multiple requests.
+        \item \textbf{Over-fetching:} When an endpoint returns more data than the client needs.
+    \end{itemize}
+    \item \textbf{How it works:} The client sends a single query specifying the exact shape of the data it needs, and the server returns a JSON object matching that shape.
+    \item \textbf{Use cases:}
+    \begin{itemize}
+        \item When the frontend is changing rapidly or has complex data requirements (e.g., news feeds).
+        \item When you need to aggregate data from multiple backend services.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{gRPC (Google Remote Procedure Call)}
+gRPC is a high-performance RPC framework.
+\begin{itemize}
+    \item \textbf{How it works:}
+    \begin{itemize}
+        \item Uses \textbf{Protocol Buffers (Protobufs)} as its schema definition language and serialization format. Protobufs are a highly efficient binary format.
+        \item Defines services and messages in \texttt{.proto} files, which can be compiled into client and server stubs in many languages.
+    \end{itemize}
+    \item \textbf{Advantages:}
+    \begin{itemize}
+        \item \textbf{High performance:} Can be up to 10x faster than REST/JSON due to efficient binary serialization.
+        \item \textbf{Features:} Supports client-side load balancing, streaming, and authentication.
+    \end{itemize}
+    \item \textbf{Disadvantages:}
+    \begin{itemize}
+        \item Not natively supported by web browsers.
+        \item Binary format is harder to debug than human-readable JSON.
+    \end{itemize}
+    \item \textbf{Use cases:} Primarily for \textbf{internal microservice communication} where performance is critical. A common pattern is to have an external-facing REST API that communicates with internal gRPC services.
+\end{itemize}
+
+\subsubsection{Server-Sent Events (SSE)}
+SSE is a standard that allows a server to push data to a client over a standard HTTP connection.
+\begin{itemize}
+    \item \textbf{How it works:} The client makes a regular HTTP request, but the server keeps the connection open and sends events as they become available, separated by newlines.
+    \item \textbf{Characteristics:}
+    \begin{itemize}
+        \item \textbf{Unidirectional:} Server-to-client push only.
+        \item Built on HTTP, so it works with existing infrastructure.
+        \item Connections can be unreliable and are often terminated by proxies after 30-60 seconds, but clients can automatically reconnect, passing the ID of the last event received.
+    \end{itemize}
+    \item \textbf{Use cases:}
+    \begin{itemize}
+        \item Short-lived updates to a UI (e.g., status of a background job).
+        \item Streaming AI responses (tokens) back to a user.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{WebSockets}
+WebSockets provide a \textbf{full-duplex (bidirectional)} communication channel over a single, long-lived TCP connection.
+\begin{itemize}
+    \item \textbf{How it works:} It starts with an HTTP "Upgrade" request and then transitions to a raw TCP-like connection for sending binary or text messages.
+    \item \textbf{Characteristics:}
+    \begin{itemize}
+        \item Low latency, high frequency, bidirectional communication.
+        \item \textbf{Stateful:} Requires managing persistent connections, which adds complexity for deployments and failure handling.
+    \end{itemize}
+    \item \textbf{Use cases:}
+    \begin{itemize}
+        \item Real-time applications requiring two-way communication:
+        \begin{itemize}
+            \item Chat applications
+            \item Multiplayer games
+            \item Live collaboration tools
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{WebRTC (Web Real-Time Communication)}
+WebRTC is a protocol that enables \textbf{peer-to-peer (P2P)} communication directly between browsers, primarily for audio and video.
+\begin{itemize}
+    \item \textbf{How it works:} It's complex, involving signaling servers (to coordinate connections), STUN servers (to traverse NATs), and TURN servers (as a fallback). It runs over UDP.
+    \item \textbf{Use cases:}
+    \begin{itemize}
+        \item Audio and video calling.
+        \item Collaborative editors (often using CRDTs - Conflict-free Replicated Data Types).
+    \end{itemize}
+    \item \textbf{Interview advice:} Avoid bringing it up unless the problem is explicitly about audio/video calling or collaborative editing.
+\end{itemize}
+
+\subsection{Load Balancing}
+When scaling horizontally (adding more servers), you need a way to distribute traffic among them.
+\begin{itemize}
+    \item \textbf{Client-Side Load Balancing:}
+    \begin{itemize}
+        \item The client is aware of all available servers (e.g., from a service registry) and chooses one to connect to directly.
+        \item \textbf{Pros:} No extra hop, lower latency.
+        \item \textbf{Cons:} Clients need to be updated when servers change; less sophisticated balancing algorithms.
+        \item \textbf{Use cases:} Internal microservices (gRPC supports this natively), DNS.
+    \end{itemize}
+    \item \textbf{Dedicated Load Balancer (Appliance):}
+    \begin{itemize}
+        \item A centralized server (hardware or software) that sits between clients and servers.
+        \item \textbf{Layer 4 (Transport Layer):} Operates at the TCP/UDP level. It forwards packets without inspecting their content. Very high performance. Use for stateful connections like WebSockets.
+        \item \textbf{Layer 7 (Application Layer):} Operates at the HTTP level. It can inspect requests and make routing decisions based on URL, headers, etc. More flexible and feature-rich, but slightly lower performance. This is the default choice for most web applications.
+        \item \textbf{Algorithms:} Round Robin, Random, Least Connections.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Deep Dives}
+\subsubsection{Regionalization and CDNs}
+\begin{itemize}
+    \item \textbf{Problem:} The speed of light imposes a hard limit on latency for global applications (e.g., ~80ms between London and New York).
+    \item \textbf{Solution:}
+    \begin{enumerate}
+        \item \textbf{Partition your system:} If possible, partition users and data by region (e.g., Uber riders and drivers are in the same city).
+        \item \textbf{Collocate data and processing:} Keep your web servers and databases in the same region to minimize back-and-forth latency.
+        \item \textbf{Replicate data:} For read-heavy workloads, replicate data across regions so reads are fast, but accept that there will be a replication lag.
+        \item \textbf{Use a CDN (Content Delivery Network):} A CDN is a network of edge servers distributed globally. It caches static content (images, videos, JS, CSS) and serves it from a location close to the user, dramatically reducing latency.
+    \end{enumerate}
+\end{itemize}
+
+\subsubsection{Failures, Timeouts, and Retries}
+\begin{itemize}
+    \item \textbf{Timeouts:} Always set a sensible timeout on any network request to avoid clients waiting forever.
+    \item \textbf{Retries:} When a request fails, it's common to retry. However, a naive retry strategy can make a bad situation worse.
+    \item \textbf{The Gold Standard:} \textbf{Retries with exponential backoff and jitter.}\ 
+    \begin{itemize}
+        \item \textbf{Exponential Backoff:} Increase the delay between retries exponentially (e.g., 1s, 2s, 4s, 8s). This gives a struggling service time to recover.
+        \item \textbf{Jitter:} Add a small, random amount of time to each delay. This prevents a "thundering herd" problem where many clients retry at the exact same time.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Cascading Failures and Circuit Breakers}
+\begin{itemize}
+    \item \textbf{Cascading Failure:} A failure in one part of a system (e.g., a slow database) causes failures in upstream services, which in turn cause failures in their upstream services, leading to a system-wide outage. Retries can often exacerbate this.
+    \item \textbf{Circuit Breaker Pattern:} A mechanism to prevent cascading failures.
+    \begin{itemize}
+        \item \textbf{How it works:} An intermediary object monitors for failures. If the failure rate for a downstream service exceeds a threshold, the circuit breaker "trips" or "opens."
+        \item While the circuit is open, all subsequent calls to the failing service fail immediately without even making a network request. This gives the downstream service a chance to recover.
+        \item Periodically, the circuit breaker will enter a "half-open" state and allow a single request through. If it succeeds, the circuit closes and normal operation resumes. If it fails, the circuit remains open.
+    \end{itemize}
+\end{itemize}
+
+\newpage
+\section{API Comparison: REST vs GraphQL}
+This project demonstrates the practical differences between REST and GraphQL APIs through a complete bookstore example with authors, books, customers, and orders.
+
+\subsection{Learning Objectives}
+\begin{itemize}
+    \item Understand REST API limitations (N+1 queries, over-fetching, multiple requests)
+    \item Experience GraphQL advantages (single queries, precise data fetching, type safety)
+    \item Compare performance and development experience between approaches
+    \item See real-world examples of API design trade-offs
+\end{itemize}
+
+\subsection{Project Structure}
+\begin{minted}{text}
+api_comparison/
+├── shared/                    # Shared components
+│   ├── models.py             # Data models (Author, Book, Customer, Order)
+│   └── database.py           # Mock in-memory database with sample data
+├── rest_api/                 # Traditional REST API
+│   └── app.py                # Flask server with CRUD endpoints
+├── graphql_api/              # Modern GraphQL API
+│   ├── schema.py             # GraphQL schema, types, and resolvers
+│   └── app.py                # FastAPI + Strawberry GraphQL server
+├── client_examples/          # Demonstration clients
+│   ├── rest_client.py        # Shows REST API problems
+│   ├── graphql_client.py     # Shows GraphQL solutions
+│   └── compare_apis.py       # Side-by-side comparison
+├── requirements.txt          # Python dependencies
+├── start_servers.sh          # Convenient startup script
+└── README.md                 # This file
+\end{minted}
+
+\subsection{API Exploration}
+\subsubsection{REST API (Flask)}
+\begin{itemize}
+    \item \textbf{Base URL}: \url{http://localhost:8000}
+    \item \textbf{Swagger Docs}: \url{http://localhost:8000/docs}
+    \item \textbf{Health Check}: \url{http://localhost:8000/health}
+\end{itemize}
+\textbf{Example REST Endpoints:}
+\begin{minted}{bash}
+GET    /authors                    # List all authors
+GET    /authors/1                  # Get specific author
+POST   /authors                    # Create author
+GET    /books?author_id=1          # Get books by author
+GET    /customers/1/orders         # Get customer orders
+\end{minted}
+
+\subsubsection{GraphQL API (Strawberry + FastAPI)}
+\begin{itemize}
+    \item \textbf{GraphQL Endpoint}: \url{http://localhost:8001/graphql}
+    \item \textbf{GraphiQL UI}: \url{http://localhost:8001/graphql} (interactive playground)
+    \item \textbf{Health Check}: \url{http://localhost:8001/health}
+\end{itemize}
+\textbf{Example GraphQL Queries:}
+\begin{minted}{graphql}
+# Get author with books (single request)
+query {
+  author(id: 1) {
+    name
+    email
+    books {
+      title
+      price
+      genre
+    }
+  }
+}
+\end{minted}
+
+\subsection{Performance Comparison}
+\subsubsection{Problem 1: Multiple Requests}
+\textbf{REST}: Author + Books = 2 requests
+\begin{minted}{bash}
+GET /authors/1      # Request 1
+GET /books?author_id=1  # Request 2
+\end{minted}
+\textbf{GraphQL}: Author + Books = 1 request
+\begin{minted}{graphql}
+query {
+  author(id: 1) {
+    name
+    books { title price }
+  }
+}
+\end{minted}
+
+\subsubsection{Problem 2: N+1 Query Problem}
+\textbf{REST}: Customer with order details = 1 + N + M requests
+\begin{itemize}
+    \item 1 request for customer
+    \item N requests for each order
+    \item M requests for each book in orders
+\end{itemize}
+\textbf{GraphQL}: Customer with order details = 1 request
+\begin{minted}{graphql}
+query {
+  customer(id: 1) {
+    orders {
+      items {
+        book { title }
+      }
+    }
+  }
+}
+\end{minted}
+
+\subsubsection{Problem 3: Over-fetching vs Precise Fetching}
+\textbf{REST}: Always returns all fields
+\begin{minted}{json}
+{
+  "id": 1,
+  "title": "Python Programming",
+  "isbn": "978-1234567890",
+  "price": 29.99,
+  "publication_date": "2023-01-15T00:00:00",
+  "author_id": 1,
+  "genre": "Programming",
+  "description": "A comprehensive guide to Python..."
+}
+\end{minted}
+\textbf{GraphQL}: Request only needed fields
+\begin{minted}{graphql}
+query {
+  books {
+    title    # Only title
+    price    # Only price
+  }
+}
+\end{minted}
+
+\end{document}

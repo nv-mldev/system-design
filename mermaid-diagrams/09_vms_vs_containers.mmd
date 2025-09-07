@@ -1,0 +1,19 @@
+graph TD
+    subgraph Physical Server
+        direction TB
+        HW[Hardware] --> HostOS[Host OS];
+
+        subgraph VM Approach
+            HostOS --> Hypervisor;
+            Hypervisor --> GuestOS_A[Guest OS A];
+            Hypervisor --> GuestOS_B[Guest OS B];
+            GuestOS_A --> App_A;
+            GuestOS_B --> App_B;
+        end
+
+        subgraph Container Approach
+            HostOS --> ContainerEngine[Container Engine];
+            ContainerEngine --> App_C;
+            ContainerEngine --> App_D;
+        end
+    end

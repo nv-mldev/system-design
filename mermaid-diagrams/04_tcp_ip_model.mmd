@@ -1,0 +1,14 @@
+graph TD
+    subgraph Your Computer
+        A[Application Layer - HTTP] --> B(Transport Layer - TCP);
+        B --> C(Network Layer - IP);
+        C --> D(Data Link Layer - WiFi/Ethernet);
+        D --> E(Physical Layer - Radio Waves/Cables);
+    end
+    subgraph Web Server
+        F[Application Layer - HTTP] --> G(Transport Layer - TCP);
+        G --> H(Network Layer - IP);
+        H --> I(Data Link Layer - Ethernet);
+        I --> J(Physical Layer - Cables);
+    end
+    E -- The Internet --> J;

@@ -1,0 +1,19 @@
+\frametitle{Diagram: VMs vs Containers}
+  \begin{verbatim}
+  graph TD
+      subgraph Physical Server
+          HW[Hardware] --> HostOS;
+          subgraph VM Approach
+              HostOS --> Hypervisor;
+              Hypervisor --> GuestOS_A;
+              Hypervisor --> GuestOS_B;
+              GuestOS_A --> App_A;
+              GuestOS_B --> App_B;
+          end
+          subgraph Container Approach
+              HostOS --> ContainerEngine;
+              ContainerEngine --> App_C;
+              ContainerEngine --> App_D;
+          end
+      end
+  \end{verbatim}

@@ -1,0 +1,13 @@
+graph TD
+    subgraph SIMD
+        direction LR
+        Instruction_SIMD --> Data1;
+        Instruction_SIMD --> Data2;
+        Instruction_SIMD --> Data3;
+    end
+    subgraph MIMD
+        direction LR
+        Instruction1_MIMD --> DataA;
+        Instruction2_MIMD --> DataB;
+        Instruction3_MIMD --> DataC;
+    end

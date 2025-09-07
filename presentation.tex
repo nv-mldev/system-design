@@ -1,0 +1,396 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{verbatim}
+
+% Theme choice
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Title and Author Information
+\title{An Introduction to System Integration}
+\author{Gemini}
+\institute{Software Team}
+\date{\today}
+
+\begin{document}
+
+% Title Frame
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Table of Contents
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+
+% --- Chapter 1 ---
+\section{Computer Architecture Fundamentals}
+
+\begin{frame}
+  \frametitle{Chapter 1: The Heart of the Machine}
+  \begin{itemize}
+    \item \textbf{Objective:} Understand the primary components of a single computer and how they interact.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Topics: Core Architecture}
+  \begin{itemize}
+    \item \textbf{The Von Neumann Architecture:}
+    \begin{itemize}
+        \item Central Processing Unit (CPU)
+        \item Main Memory (RAM)
+        \item Input/Output (I/O) Systems
+    \end{itemize}
+    \item \textbf{A Deeper Look at the CPU:}
+    \begin{itemize}
+        \item Control Unit (CU), Arithmetic Logic Unit (ALU), Registers
+    \end{itemize}
+    \item \textbf{The Memory Hierarchy:}
+    \begin{itemize}
+        \item L1/L2/L3 Cache
+        \item RAM (Random Access Memory)
+        \item Permanent Storage (SSDs, HDDs)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Diagram: Von Neumann Architecture}
+  \begin{verbatim}
+  graph TD
+      subgraph Computer
+          CPU -- "fetches/stores" --> Memory;
+          CPU -- "reads/writes" --> IO_Devices;
+          IO_Devices -- "data" --> Memory;
+      end
+      CPU <--> CU & ALU & Registers;
+      subgraph IO_Devices
+          direction LR
+          Input_Device --> CPU;
+          CPU --> Output_Device;
+      end
+  \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Diagram: Memory Hierarchy}
+  \begin{verbatim}
+  graph TD
+      A[CPU Registers] --> B(L1 Cache);
+      B --> C(L2 Cache);
+      C --> D(L3 Cache);
+      D --> E(Main Memory - RAM);
+      E --> F(Permanent Storage - SSD/HDD);
+  \end{verbatim}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Real-World Application: Launching an App}
+  \begin{itemize}
+    \item When you double-click an icon:
+    \item The OS finds the program on your \textbf{Permanent Storage (SSD)}.
+    \item It loads the program into \textbf{Main Memory (RAM)}.
+    \item The \textbf{CPU} fetches instructions from RAM into its \textbf{Caches} to execute the program.
+  \end{itemize}
+\end{frame}
+
+% --- Chapter 2 ---
+\section{Advanced CPU Architectures}
+
+\begin{frame}
+  \frametitle{Chapter 2: Processing in Parallel}
+  \begin{itemize}
+    \item \textbf{Objective:} Explore how modern processors handle multiple tasks and data streams simultaneously.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Topics: Flynn's Taxonomy}
+  \begin{itemize}
+    \item \textbf{SIMD (Single Instruction, Multiple Data):}
+    \begin{itemize}
+        \item One instruction is applied to many different data points at once.
+        \item \textbf{Analogy:} A drill sergeant telling a whole platoon to "turn left".
+    \end{itemize}
+    \item \textbf{MIMD (Multiple Instruction, Multiple Data):}
+    \begin{itemize}
+        \item Multiple processors execute different instructions on different data streams.
+        \item \textbf{Analogy:} A workshop with multiple craftspeople working on different projects.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Diagram: SIMD vs MIMD}
+  \begin{verbatim}
+  graph TD
+      subgraph SIMD
+          direction LR
+          Instruction_SIMD --> Data1;
+          Instruction_SIMD --> Data2;
+          Instruction_SIMD --> Data3;
+      end
+      subgraph MIMD
+          direction LR
+          Instruction1_MIMD --> DataA;
+          Instruction2_MIMD --> DataB;
+          Instruction3_MIMD --> DataC;
+      end
+  \end{verbatim}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Real-World Application: SIMD vs MIMD}
+  \begin{itemize}
+    \item \textbf{SIMD:} Applying a brightness filter in a photo editor. The same instruction ("increase brightness") is applied to every pixel at once.
+    \item \textbf{MIMD:} A web server handling multiple user requests simultaneously. Each core processes a different request.
+  \end{itemize}
+\end{frame}
+
+% --- Chapter 3 ---
+\section{Network Architectures and Layers}
+
+\begin{frame}
+  \frametitle{Chapter 3: Connecting the Dots}
+  \begin{itemize}
+    \item \textbf{Objective:} Understand how different computer systems communicate with each other over a network.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Topics: The TCP/IP Model}
+  A 5-Layer View for simplifying the complexity of networking:
+  \begin{itemize}
+    \item Layer 5: Application (HTTP, DNS)
+    \item Layer 4: Transport (TCP, UDP)
+    \item Layer 3: Network (IP)
+    \item Layer 2: Data Link (Ethernet, Wi-Fi)
+    \item Layer 1: Physical (Cables, Radio Waves)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Diagram: TCP/IP Model}
+  \begin{verbatim}
+  graph TD
+      subgraph Your Computer
+          A[Application] --> B(Transport);
+          B --> C(Network);
+          C --> D(Data Link);
+          D --> E(Physical);
+      end
+      subgraph Web Server
+          F[Application] --> G(Transport);
+          G --> H(Network);
+          H --> I(Data Link);
+          I --> J(Physical);
+      end
+      E -- The Internet --> J;
+  \end{verbatim}
+\end{frame}
+
+% --- Chapter 4 ---
+\section{A Practical Example}
+
+\begin{frame}
+  \frametitle{Chapter 4: Tying It All Together}
+  \begin{itemize}
+    \item \textbf{Objective:} Trace a single, common action from start to finish to see how all the concepts interact.
+    \item \textbf{Scenario:} "Loading google.com in a web browser."
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Diagram: Loading google.com}
+  \begin{verbatim}
+   sequenceDiagram
+      participant User
+      participant Browser
+      participant OS
+      participant DNS_Server
+      participant Google_Server
+
+      User->>Browser: Enters "google.com"
+      Browser->>OS: Need IP for "google.com"
+      OS->>DNS_Server: Where is "google.com"?
+      DNS_Server-->>OS: IP is 142.250.190.78
+      OS-->>Browser: Here is the IP
+      Browser->>Google_Server: HTTP GET request
+      Google_Server-->>Browser: HTTP 200 OK
+      Browser->>User: Renders the webpage
+  \end{verbatim}
+\end{frame}
+
+% --- Chapter 5 ---
+\section{Network Communication Patterns}
+
+\begin{frame}
+  \frametitle{Chapter 5: Network Communication}
+  \begin{itemize}
+    \item \textbf{Objective:} Explore common methods and patterns for communication between systems.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Topics: Communication Patterns}
+  \begin{itemize}
+    \item \textbf{HTTP Communication:} Request/Response model.
+    \item \textbf{Sockets:} Low-level, bidirectional communication.
+    \item \textbf{Web Servers:} Role of servers like Nginx.
+    \item \textbf{Message Queues:} Decoupling systems.
+    \item \textbf{Publish-Subscribe Pattern:} Scalable messaging.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Diagram: Message Queue vs Pub/Sub}
+  \begin{verbatim}
+  graph TD
+      subgraph Message Queue
+          Producer --> Queue((Queue));
+          Queue --> Consumer;
+      end
+      subgraph Publish-Subscribe
+          Publisher --> Broker((Topic));
+          Broker --> Subscriber1;
+          Broker --> Subscriber2;
+      end
+  \end{verbatim}
+\end{frame}
+
+% --- Chapter 6 ---
+\section{Concurrency and Parallelism}
+
+\begin{frame}
+  \frametitle{Chapter 6: Concurrency & Parallelism}
+  \begin{itemize}
+    \item \textbf{Objective:} Understand different models for executing multiple tasks at the same time.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Topics: Concurrency Models}
+  \begin{itemize}
+    \item \textbf{Concurrent Processing (Threads):} Independent execution paths in one process. Feels simultaneous.
+    \item \textbf{Parallel Processing:} Truly simultaneous execution on multiple cores.
+    \item \textbf{Asynchronous Processing (Async):} Non-blocking operations.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Diagram: Concurrency vs Parallelism}
+  \begin{verbatim}
+  graph TD
+      subgraph Concurrency (1 Core)
+          direction LR
+          Core1 -- Task A --> Switch;
+          Switch -- Task B --> Switch;
+          Switch -- Task A --> ...;
+      end
+      subgraph Parallelism (2 Cores)
+          direction LR
+          CoreA -- Task A --> DoneA;
+          CoreB -- Task B --> DoneB;
+      end
+  \end{verbatim}
+\end{frame}
+
+% --- Chapter 7 ---
+\section{Operating System Fundamentals}
+
+\begin{frame}
+  \frametitle{Chapter 7: OS Fundamentals}
+  \begin{itemize}
+    \item \textbf{Objective:} Gain a foundational understanding of the role of the Operating System.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Topics: OS Core Functions}
+  \begin{itemize}
+    \item Process Management
+    \item Memory Management
+    \item File Systems
+    \item I/O Handling
+    \item Windows vs. Linux
+    \item Hyper-Threading
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Diagram: OS Kernel}
+  \begin{verbatim}
+  graph TD
+      subgraph OS Kernel
+          Scheduler --> P1(Process 1);
+          Scheduler --> P2(Process 2);
+          MemoryManager --> P1_Mem;
+          MemoryManager --> P2_Mem;
+      end
+      subgraph Hardware
+          CPU & RAM & Disk;
+      end
+      OS_Kernel -- "manages" --> Hardware;
+  \end{verbatim}
+\end{frame}
+
+% --- Chapter 8 ---
+\section{Virtualization and Isolation}
+
+\begin{frame}
+  \frametitle{Chapter 8: Virtualization}
+  \begin{itemize}
+    \item \textbf{Objective:} Understand how we create virtual environments to run software.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Topics: Virtualization Types}
+  \begin{itemize}
+    \item \textbf{Virtual Machines (VMs):} Emulating an entire computer system (hardware + OS).
+    \item \textbf{Containers:} OS-level virtualization, packaging an application and its dependencies (e.g., Docker).
+    \item Key differences: Overhead, startup time, density.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Diagram: VMs vs Containers}
+  \begin{figure}
+    \includegraphics[width=\textwidth]{mermaid-diagrams/09_vms_vs_containers.png}
+    \caption{VMs vs Containers}
+  \end{figure}
+\end{frame}
+
+% --- Final Frame ---
+\begin{frame}
+  \Huge{\centerline{Thank You}}
+\end{frame}
+
+\end{document}
+ontainerEngine --> App_D;
+          end
+      end
+  \end{verbatim}
+\end{frame}
+
+% --- Final Frame ---
+\begin{frame}
+  \Huge{\centerline{Thank You}}
+\end{frame}
+
+\end{document}
+ent}
+uge{\centerline{Thank You}}
+\end{frame}
+
+\end{document}
+e ---
+\begin{frame}
+  \Huge{\centerline{Thank You}}
+\end{frame}
+
+\end{document}

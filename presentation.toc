@@ -1,0 +1,8 @@
+\beamer@sectionintoc {1}{Computer Architecture Fundamentals}{3}{0}{1}
+\beamer@sectionintoc {2}{Advanced CPU Architectures}{8}{0}{2}
+\beamer@sectionintoc {3}{Network Architectures and Layers}{12}{0}{3}
+\beamer@sectionintoc {4}{A Practical Example}{15}{0}{4}
+\beamer@sectionintoc {5}{Network Communication Patterns}{17}{0}{5}
+\beamer@sectionintoc {6}{Concurrency and Parallelism}{20}{0}{6}
+\beamer@sectionintoc {7}{Operating System Fundamentals}{23}{0}{7}
+\beamer@sectionintoc {8}{Virtualization and Isolation}{26}{0}{8}

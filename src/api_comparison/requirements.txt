@@ -1,0 +1,21 @@
+# Requirements for API Comparison Project
+
+# REST API (Flask)
+Flask==2.3.2
+Flask-CORS==4.0.0
+
+# GraphQL API (Strawberry + FastAPI)
+strawberry-graphql==0.211.0
+fastapi==0.103.0
+uvicorn==0.23.2
+
+# HTTP Client for testing
+requests==2.31.0
+
+# Development and testing
+pytest==7.4.0
+pytest-asyncio==0.21.1
+
+# Optional: For better development experience
+black==23.7.0
+flake8==6.0.0
