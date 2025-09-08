@@ -24,6 +24,376 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Computer Fundamentals: Essential Terminology Part 1}
+\begin{itemize}
+    \item \textbf{CPU (Central Processing Unit):}
+    \begin{itemize}
+        \item The ``brain'' of the computer that executes instructions
+        \item Contains multiple \textbf{cores} - independent processing units
+        \item Each core can handle one \textbf{thread} (sequence of instructions) at a time
+    \end{itemize}
+    \item \textbf{Clock Speed (measured in GHz):}
+    \begin{itemize}
+        \item Number of cycles per second the CPU can execute
+        \item 1 GHz = 1 billion cycles per second
+        \item Higher clock speed generally means faster processing
+    \end{itemize}
+    \item \textbf{Cores vs Threads:}
+    \begin{itemize}
+        \item \textbf{Core:} Physical processing unit within CPU
+        \item \textbf{Thread:} Virtual processing unit (software concept)
+        \item Modern CPUs can handle multiple threads per core (hyperthreading)
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Computer Fundamentals: Essential Terminology Part 2}
+\begin{itemize}
+    \item \textbf{Memory Hierarchy (from fastest to slowest):}
+    \begin{itemize}
+        \item \textbf{Registers:} Tiny, ultra-fast storage inside CPU cores
+        \item \textbf{Cache (L1/L2/L3):} Small, fast memory close to CPU cores
+        \item \textbf{RAM (Random Access Memory):} Main system memory, volatile
+        \item \textbf{Storage (SSD/HDD):} Permanent storage, non-volatile
+    \end{itemize}
+    \item \textbf{GPU (Graphics Processing Unit):}
+    \begin{itemize}
+        \item Specialized processor with hundreds/thousands of simple cores
+        \item Optimized for parallel processing (many tasks simultaneously)
+        \item Excellent for graphics, AI, and scientific computing
+    \end{itemize}
+    \item \textbf{Architecture:}
+    \begin{itemize}
+        \item The fundamental design and organization of a computer system
+        \item Defines how components communicate and process data
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Computer Fundamentals: Essential Terminology Part 3}
+\begin{itemize}
+    \item \textbf{Instruction Set Architecture (ISA):}
+    \begin{itemize}
+        \item The ``language'' that the CPU understands
+        \item Defines available operations (add, subtract, load, store, etc.)
+        \item Examples: x86, ARM, RISC-V
+    \end{itemize}
+    \item \textbf{RISC vs CISC:}
+    \begin{itemize}
+        \item \textbf{RISC:} Reduced Instruction Set Computer - simple, uniform instructions
+        \item \textbf{CISC:} Complex Instruction Set Computer - complex, variable instructions
+        \item Trade-off between instruction simplicity and capability
+    \end{itemize}
+    \item \textbf{Pipeline:}
+    \begin{itemize}
+        \item Technique to overlap instruction execution stages
+        \item Like an assembly line - multiple instructions in different stages
+        \item Improves overall throughput (instructions completed per second)
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Performance Metrics: Understanding the Numbers}
+\begin{itemize}
+    \item \textbf{Frequency Measurements:}
+    \begin{itemize}
+        \item \textbf{MHz:} Millions of cycles per second
+        \item \textbf{GHz:} Billions of cycles per second (1 GHz = 1000 MHz)
+        \item \textbf{Example:} 3.4 GHz = 3,400,000,000 cycles per second
+    \end{itemize}
+    \item \textbf{Performance Measurements:}
+    \begin{itemize}
+        \item \textbf{FLOPS:} Floating Point Operations Per Second (scientific computing)
+        \item \textbf{TOPS:} Tera Operations Per Second (AI/ML workloads)
+        \item \textbf{IPC:} Instructions Per Cycle (efficiency measure)
+    \end{itemize}
+    \item \textbf{Memory Measurements:}
+    \begin{itemize}
+        \item \textbf{Bandwidth:} Data transfer rate (GB/s - Gigabytes per second)
+        \item \textbf{Latency:} Time delay for memory access (nanoseconds)
+        \item \textbf{Capacity:} Amount of data storage (GB, TB)
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Power and Efficiency Fundamentals}
+\begin{itemize}
+    \item \textbf{Power Consumption:}
+    \begin{itemize}
+        \item \textbf{Watts (W):} Rate of energy consumption
+        \item \textbf{TDP:} Thermal Design Power - maximum heat generated
+        \item \textbf{Idle vs Load:} Power varies based on computational demand
+    \end{itemize}
+    \item \textbf{Efficiency Metrics:}
+    \begin{itemize}
+        \item \textbf{Performance per Watt:} TOPS/W, FLOPS/W
+        \item Higher efficiency = more computation per unit of power
+        \item Critical for mobile devices and data centers
+    \end{itemize}
+    \item \textbf{Thermal Management:}
+    \begin{itemize}
+        \item \textbf{Heat Generation:} Power consumption creates heat
+        \item \textbf{Thermal Throttling:} CPU reduces speed when too hot
+        \item \textbf{Cooling Solutions:} Fans, heat sinks, liquid cooling
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Parallel Processing Concepts}
+\begin{itemize}
+    \item \textbf{Sequential vs Parallel Processing:}
+    \begin{itemize}
+        \item \textbf{Sequential:} One task at a time (traditional approach)
+        \item \textbf{Parallel:} Multiple tasks simultaneously
+        \item \textbf{Speedup:} Theoretical maximum = number of cores/processors
+    \end{itemize}
+    \item \textbf{Types of Parallelism:}
+    \begin{itemize}
+        \item \textbf{Instruction-Level:} Multiple instructions per cycle
+        \item \textbf{Thread-Level:} Multiple threads on different cores
+        \item \textbf{Data-Level:} Same operation on multiple data (SIMD)
+    \end{itemize}
+    \item \textbf{Challenges:}
+    \begin{itemize}
+        \item \textbf{Dependencies:} Some tasks must wait for others to complete
+        \item \textbf{Communication:} Cores must share data and coordinate
+        \item \textbf{Load Balancing:} Distribute work evenly across cores
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What is an Instruction? Understanding Assembly Language}
+\begin{itemize}
+    \item \textbf{Instruction Definition:}
+    \begin{itemize}
+        \item A single, basic operation that the CPU can perform
+        \item Think of it as one step in a recipe
+        \item Written in assembly language (human-readable CPU commands)
+    \end{itemize}
+    \item \textbf{Common Instruction Types:}
+    \begin{itemize}
+        \item \textbf{Arithmetic:} ADD, SUB, MUL, DIV
+        \item \textbf{Data Movement:} MOV, LOAD, STORE
+        \item \textbf{Control Flow:} JUMP, BRANCH, CALL, RETURN
+        \item \textbf{Logic:} AND, OR, XOR, NOT
+    \end{itemize}
+    \item \textbf{Example Translation:}
+    \begin{itemize}
+        \item \textbf{C Code:} \texttt{int c = a + b;}
+        \item \textbf{Assembly:} \texttt{ADD R3, R1, R2} (R3 = R1 + R2)
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Assembly Instruction Examples}
+\begin{itemize}
+    \item \textbf{ARM Assembly Examples:}
+\end{itemize}
+\begin{verbatim}
+// Arithmetic Instructions
+ADD R1, R2, R3       // R1 = R2 + R3
+SUB R1, R2, #5       // R1 = R2 - 5 (immediate value)
+MUL R1, R2, R3       // R1 = R2 * R3
+
+// Data Movement Instructions  
+MOV R1, #10          // Move value 10 into R1
+LDR R1, [R2]         // Load from memory[R2] into R1
+STR R1, [R2, #4]     // Store R1 to memory[R2 + 4]
+
+// Control Flow Instructions
+B label              // Branch (jump) to label
+BL function          // Branch with link (function call)
+CMP R1, R2           // Compare R1 and R2
+BEQ equal_label      // Branch if equal
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instruction Execution: Cycles and Timing}
+\begin{itemize}
+    \item \textbf{Does ADD take one cycle or multiple cycles?}
+    \begin{itemize}
+        \item \textbf{Answer:} It depends on the CPU architecture!
+        \item Different architectures handle instructions differently
+    \end{itemize}
+    \item \textbf{Simple/Early CPUs:} One instruction = Multiple cycles
+    \begin{itemize}
+        \item \textbf{Cycle 1:} Fetch instruction from memory
+        \item \textbf{Cycle 2:} Decode instruction (understand what it does)
+        \item \textbf{Cycle 3:} Execute the operation (perform addition)
+        \item \textbf{Cycle 4:} Write result back to register
+        \item \textbf{Total:} 4 cycles per ADD instruction
+    \end{itemize}
+    \item \textbf{Modern CPUs:} Use pipelining for efficiency
+    \begin{itemize}
+        \item Each instruction still takes multiple cycles to complete
+        \item But CPU can start a new instruction every cycle
+        \item Like an assembly line in a factory
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{CPU Pipelining: The Assembly Line Approach}
+\begin{itemize}
+    \item \textbf{Pipeline Stages (typical 5-stage pipeline):}
+    \begin{itemize}
+        \item \textbf{IF:} Instruction Fetch
+        \item \textbf{ID:} Instruction Decode  
+        \item \textbf{EX:} Execute
+        \item \textbf{MEM:} Memory Access (if needed)
+        \item \textbf{WB:} Write Back
+    \end{itemize}
+    \item \textbf{Pipeline Timeline Example:}
+    \begin{itemize}
+        \item \textbf{Clock 1:} Instruction 1 starts (IF stage)
+        \item \textbf{Clock 2:} Instruction 1 (ID), Instruction 2 starts (IF)
+        \item \textbf{Clock 3:} Instruction 1 (EX), Instruction 2 (ID), Instruction 3 (IF)
+        \item \textbf{Clock 4:} Instruction 1 (MEM), Instruction 2 (EX), Instruction 3 (ID), Instruction 4 (IF)
+        \item \textbf{Clock 5:} Instruction 1 (WB), Instruction 2 (MEM), Instruction 3 (EX), Instruction 4 (ID)
+    \end{itemize}
+    \item \textbf{Result:} Each instruction takes 5 cycles, but CPU completes one instruction per cycle!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{RISC vs CISC: Instruction Complexity Impact}
+\begin{itemize}
+    \item \textbf{RISC Instructions (ARM example):}
+    \begin{itemize}
+        \item \textbf{Simple, uniform:} All instructions same size (32-bit)
+        \item \textbf{Predictable timing:} ADD always takes same number of cycles
+        \item \textbf{Pipeline friendly:} Easy to overlap execution
+        \item \textbf{Example:} \texttt{ADD R1, R2, R3} → 1 cycle (after pipeline filled)
+    \end{itemize}
+    \item \textbf{CISC Instructions (x86 example):}
+    \begin{itemize}
+        \item \textbf{Variable complexity:} Instructions can be 1-15 bytes
+        \item \textbf{Variable timing:} Cycles depend on instruction complexity
+        \item \textbf{Pipeline challenges:} Complex decoding required
+        \item \textbf{Examples:}
+        \begin{itemize}
+            \item \texttt{ADD EAX, EBX} → 1 cycle (simple)
+            \item \texttt{ADD EAX, [EBX + 8]} → 3-5 cycles (memory access)
+            \item \texttt{ADD EAX, [EBX + ECX*2 + 16]} → 5-8 cycles (complex addressing)
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Understanding Threads: Sequential Instruction Streams}
+\begin{itemize}
+    \item \textbf{What is a Thread?}
+    \begin{itemize}
+        \item A sequence of instructions to be executed
+        \item One thread = one sequential pipeline of instructions
+        \item Each thread has its own program counter and register state
+    \end{itemize}
+    \item \textbf{Single Thread Execution:}
+    \begin{itemize}
+        \item Instructions execute in order: Inst1 → Inst2 → Inst3 → Inst4
+        \item Each instruction flows through the CPU pipeline
+        \item One core can execute one thread at a time (traditionally)
+    \end{itemize}
+    \item \textbf{Thread Example:}
+    \begin{itemize}
+        \item \textbf{Thread A:} Calculate sum of array elements
+        \item \textbf{Instructions:} LOAD, ADD, LOAD, ADD, LOAD, ADD, STORE
+        \item \textbf{Execution:} Sequential through pipeline stages
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Modern CPU Capabilities: Beyond Single Threading}
+\begin{itemize}
+    \item \textbf{Multiple Threads per Core (Hyperthreading/SMT):}
+    \begin{itemize}
+        \item \textbf{Thread A:} Inst1A → Inst2A → Inst3A
+        \item \textbf{Thread B:} Inst1B → Inst2B → Inst3B
+        \item \textbf{Interleaved execution:} CPU switches between threads each cycle
+        \item Helps utilize pipeline when one thread stalls
+    \end{itemize}
+    \item \textbf{Superscalar Execution (Multiple Pipelines):}
+    \begin{itemize}
+        \item Single thread, but multiple execution units
+        \item \texttt{ADD R1, R2, R3} and \texttt{MUL R4, R5, R6} can execute simultaneously
+        \item No dependency = parallel execution within single thread
+    \end{itemize}
+    \item \textbf{Multi-Core Systems:}
+    \begin{itemize}
+        \item Each core can execute different threads independently
+        \item 12 cores = up to 12 threads executing truly in parallel
+        \item With hyperthreading: 12 cores = 24 threads
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Real-World Example: Jetson Orin AGX Instruction Execution}
+\begin{itemize}
+    \item \textbf{ARM Cortex-A78 Specifications:}
+    \begin{itemize}
+        \item \textbf{Clock Speed:} 3.4 GHz (3.4 billion cycles/second)
+        \item \textbf{Pipeline Depth:} 11 stages
+        \item \textbf{Execution Units:} 4 parallel units
+        \item \textbf{Threads per Core:} 1 (no hyperthreading)
+    \end{itemize}
+    \item \textbf{Single ADD Instruction Performance:}
+    \begin{itemize}
+        \item \textbf{Latency:} 11 cycles to complete (pipeline depth)
+        \item \textbf{Throughput:} 1 instruction started per cycle
+        \item \textbf{Parallel Execution:} Up to 4 instructions per cycle
+        \item \textbf{Real Performance:} 2-3 instructions per cycle (average)
+    \end{itemize}
+    \item \textbf{System-Level Performance:}
+    \begin{itemize}
+        \item \textbf{12 cores × 3.4 billion cycles × 2.5 avg IPC = 102 billion instructions/second}
+        \item Each core handles one instruction stream (thread)
+        \item Total system can handle 12 independent threads
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Key Takeaways: Instructions, Cycles, and Threads}
+\begin{itemize}
+    \item \textbf{Instructions:}
+    \begin{itemize}
+        \item Basic CPU operations written in assembly language
+        \item Translated from high-level programming languages
+        \item Different types: arithmetic, data movement, control flow
+    \end{itemize}
+    \item \textbf{Cycles and Timing:}
+    \begin{itemize}
+        \item Each instruction takes multiple cycles to complete
+        \item Pipelining allows high throughput despite multi-cycle latency
+        \item RISC: predictable timing, CISC: variable timing
+    \end{itemize}
+    \item \textbf{Threads:}
+    \begin{itemize}
+        \item One thread = one sequential stream of instructions
+        \item Modern CPUs can handle multiple threads per core
+        \item Multi-core systems enable true parallel thread execution
+    \end{itemize}
+    \item \textbf{Performance Factors:}
+    \begin{itemize}
+        \item Clock speed, pipeline efficiency, instruction-level parallelism
+        \item Thread management and core utilization
+        \item Architecture design choices (RISC vs CISC)
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
 
 
 \begin{frame} 
@@ -135,7 +505,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{ARM Instruction Set Example}
+\frametitle{ARM Instruction Set Example: Load/Store and Arithmetic}
 \begin{itemize}
     \item \textbf{ARM Assembly Examples:}
 \end{itemize}
@@ -147,7 +517,18 @@ STR R1, [R2, #4]    // Store R1 to memory[R2 + 4]
 // Arithmetic Operations  
 ADD R1, R2, R3      // R1 = R2 + R3
 SUB R1, R2, #5      // R1 = R2 - 5 (immediate value)
+\end{verbatim}
+\begin{itemize}
+    \item \textbf{Note:} Load/Store and Arithmetic instructions form the core of data manipulation.
+\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{ARM Instruction Set Example: Conditional Execution and Branching}
+\begin{itemize}
+    \item \textbf{ARM Assembly Examples:}
+\end{itemize}
+\begin{verbatim}
 // Conditional Execution
 ADDEQ R1, R2, R3    // Add only if equal flag set
 MOVNE R1, #0        // Move 0 to R1 if not equal
@@ -158,7 +539,7 @@ BEQ label           // Branch if equal
 BL function         // Branch with link (function call)
 \end{verbatim}
 \begin{itemize}
-    \item \textbf{Note:} All instructions are 32-bit, enabling efficient pipelining
+    \item \textbf{Note:} Use conditional flags and branching for control flow.
 \end{itemize}
 \end{frame}
 
@@ -214,10 +595,10 @@ BL function         // Branch with link (function call)
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{x86 Instruction Set Example}
-\begin{itemize}
-    \item \textbf{x86 Assembly Examples:}
-\end{itemize}
+\frametitle{x86 Instruction Set Example: Memory \& Variable-Length Instructions}
+    \begin{itemize}
+        \item \textbf{x86 Assembly Examples:}
+    \end{itemize}
 \begin{verbatim}
 // Complex Memory Operations
 ADD [EBX], EAX      // Add EAX to memory[EBX], store in memory
@@ -226,7 +607,18 @@ MOV EAX, [EBX+4]    // Load from memory[EBX+4] to EAX
 // Variable Length Instructions
 MOV AL, 5           // 2 bytes: Move immediate to 8-bit register
 MOV EAX, 0x12345678 // 5 bytes: Move 32-bit immediate to register
+\end{verbatim}
+\begin{itemize}
+    \item \textbf{Note:} Variable-length encoding ranges from 1 to 15 bytes
+\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{x86 Instruction Set Example: Addressing, Strings \& Stack}
+    \begin{itemize}
+        \item \textbf{x86 Assembly Examples:}
+    \end{itemize}
+\begin{verbatim}
 // Complex Addressing Modes
 MOV EAX, [EBX + ECX*2 + 8]  // EAX = memory[EBX + ECX*2 + 8]
 
@@ -238,7 +630,7 @@ PUSH EAX           // Push EAX onto stack
 CALL function      // Call function (push return address + jump)
 \end{verbatim}
 \begin{itemize}
-    \item \textbf{Note:} Instructions vary from 1-15 bytes, complex decoding required
+    \item \textbf{Note:} Complex decoding required for advanced addressing and control instructions
 \end{itemize}
 \end{frame}
 
@@ -345,6 +737,262 @@ CALL function      // Call function (push return address + jump)
         \item \textbf{L1/L2/L3 Cache:} Ultra-fast memory on the CPU.
         \item \textbf{RAM (Random Access Memory):} Volatile, fast memory for active programs.
         \item \textbf{Permanent Storage:} Non-volatile, slower storage (SSDs, HDDs).
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Real-World Example: NVIDIA Jetson Orin AGX}
+\begin{itemize}
+    \item \textbf{Why Jetson Orin AGX?}
+    \begin{itemize}
+        \item High-performance AI computer for edge computing
+        \item Combines ARM CPU architecture with powerful GPU
+        \item Perfect example of modern heterogeneous computing
+        \item Real specifications we can analyze and understand
+    \end{itemize}
+    \item \textbf{What We'll Learn:}
+    \begin{itemize}
+        \item What does "3.4 GHz" actually mean?
+        \item How memory hierarchy works in practice
+        \item Understanding core counts and parallel processing
+        \item Power consumption and thermal design
+        \item GPU vs CPU architecture differences
+    \end{itemize}
+    \item \textbf{Context:} Used in autonomous vehicles, robotics, industrial AI, and edge computing applications
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Jetson Orin AGX: CPU Specifications Deep Dive}
+\begin{itemize}
+    \item \textbf{CPU Architecture:}
+    \begin{itemize}
+        \item \textbf{12-core ARM Cortex-A78AE} (ARM v8.2 64-bit architecture)
+        \item \textbf{Base Clock: 2.2 GHz, Boost Clock: 3.4 GHz}
+        \item \textbf{Process Node:} Samsung 8nm (8LPP) technology
+    \end{itemize}
+    \item \textbf{What does 3.4 GHz mean?}
+    \begin{itemize}
+        \item \textbf{Clock Speed:} 3.4 billion cycles per second
+        \item Each cycle can potentially execute one instruction
+        \item Higher frequency = more operations per second (generally)
+        \item \textbf{Reality:} Modern CPUs execute multiple instructions per cycle
+    \end{itemize}
+    \item \textbf{12 Cores Explained:}
+    \begin{itemize}
+        \item Each core can run independent threads simultaneously
+        \item Total theoretical capacity: 12 × 3.4 billion = 40.8 billion operations/second
+        \item Perfect for parallel workloads (AI inference, multimedia processing)
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Understanding Clock Speed: The 3.4 GHz Deep Dive}
+\begin{itemize}
+    \item \textbf{Clock Signal Fundamentals:}
+    \begin{itemize}
+        \item \textbf{Clock Generator:} Creates regular electrical pulses
+        \item \textbf{3.4 GHz = 3,400,000,000 cycles per second}
+        \item \textbf{Clock Period:} 1/3.4 GHz = 0.29 nanoseconds per cycle
+    \end{itemize}
+    \item \textbf{What Happens in One Clock Cycle?}
+    \begin{itemize}
+        \item \textbf{Fetch:} Read instruction from memory/cache
+        \item \textbf{Decode:} Understand what the instruction does
+        \item \textbf{Execute:} Perform the operation (add, multiply, etc.)
+        \item \textbf{Writeback:} Store the result
+    \end{itemize}
+    \item \textbf{Pipeline Efficiency:}
+    \begin{itemize}
+        \item Modern CPUs use \textbf{pipelining}: overlap instruction stages
+        \item Multiple instructions in different stages simultaneously
+        \item \textbf{Cortex-A78:} 13-stage pipeline for efficiency
+        \item Can complete \textbf{multiple instructions per cycle} when optimized
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Jetson Orin AGX: Memory Hierarchy in Action}
+\begin{itemize}
+    \item \textbf{L1 Cache (Per Core):}
+    \begin{itemize}
+        \item \textbf{64KB Instruction + 64KB Data cache}
+        \item \textbf{Access Time:} 1-2 clock cycles (0.6-1.2 nanoseconds)
+        \item \textbf{Purpose:} Store most frequently used instructions and data
+    \end{itemize}
+    \item \textbf{L2 Cache (Per Core):}
+    \begin{itemize}
+        \item \textbf{1MB per core} (12MB total L2 cache)
+        \item \textbf{Access Time:} 8-12 clock cycles (2.4-3.6 nanoseconds)
+        \item \textbf{Purpose:} Secondary cache for recent data
+    \end{itemize}
+    \item \textbf{L3 Cache (Shared):}
+    \begin{itemize}
+        \item \textbf{6MB shared across all cores}
+        \item \textbf{Access Time:} 20-30 clock cycles (6-9 nanoseconds)
+        \item \textbf{Purpose:} Reduce main memory access, improve inter-core communication
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Jetson Orin AGX: System Memory and Storage}
+\begin{itemize}
+    \item \textbf{Main Memory (LPDDR5):}
+    \begin{itemize}
+        \item \textbf{32GB LPDDR5 RAM} (Low Power DDR5)
+        \item \textbf{Memory Bandwidth:} 204.8 GB/s
+        \item \textbf{Access Time:} 60-100 nanoseconds (200-350 clock cycles)
+        \item \textbf{Unified Memory:} CPU and GPU share the same memory pool
+    \end{itemize}
+    \item \textbf{Storage:}
+    \begin{itemize}
+        \item \textbf{64GB eUFS 3.1} (embedded Universal Flash Storage)
+        \item \textbf{NVMe SSD support} via M.2 Key M slot
+        \item \textbf{Access Time:} Microseconds (millions of clock cycles)
+    \end{itemize}
+    \item \textbf{Memory Hierarchy Performance Gap:}
+    \begin{itemize}
+        \item \textbf{L1 Cache:} 1× (baseline speed)
+        \item \textbf{L2 Cache:} 6× slower than L1
+        \item \textbf{Main Memory:} 100× slower than L1
+        \item \textbf{Storage:} 10,000× slower than L1
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{GPU Architecture: Parallel Computing Powerhouse}
+\begin{itemize}
+    \item \textbf{Jetson Orin AGX GPU:}
+    \begin{itemize}
+        \item \textbf{2048 CUDA Cores} (NVIDIA Ampere architecture)
+        \item \textbf{64 Tensor Cores} (4th generation, AI-optimized)
+        \item \textbf{GPU Clock:} Up to 1.3 GHz
+        \item \textbf{AI Performance:} 275 TOPS (Tera Operations Per Second)
+    \end{itemize}
+    \item \textbf{CPU vs GPU Philosophy:}
+    \begin{itemize}
+        \item \textbf{CPU:} 12 powerful cores, optimized for sequential tasks
+        \item \textbf{GPU:} 2048 simpler cores, optimized for parallel tasks
+        \item \textbf{CPU Core:} Complex, large, smart (out-of-order execution)
+        \item \textbf{GPU Core:} Simple, small, numerous (in-order execution)
+    \end{itemize}
+    \item \textbf{Parallel Processing Example:}
+    \begin{itemize}
+        \item \textbf{Image Processing:} Each pixel processed by different GPU core
+        \item \textbf{AI Inference:} Matrix operations split across hundreds of cores
+        \item \textbf{Speedup:} 10-100× faster than CPU for parallel workloads
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Power and Thermal Management}
+\begin{itemize}
+    \item \textbf{Power Consumption:}
+    \begin{itemize}
+        \item \textbf{Total System Power:} 15W to 60W (configurable)
+        \item \textbf{Idle Power:} ~8W (power-saving features active)
+        \item \textbf{Peak Performance:} 60W (maximum computational load)
+        \item \textbf{Power Efficiency:} 4.6 TOPS/W (AI workloads)
+    \end{itemize}
+    \item \textbf{Why Power Matters:}
+    \begin{itemize}
+        \item \textbf{Heat Generation:} Power = Heat (thermodynamics)
+        \item \textbf{Battery Life:} Lower power = longer operation time
+        \item \textbf{Cooling Requirements:} Affects system design and cost
+        \item \textbf{Performance Scaling:} Higher power = higher performance (generally)
+    \end{itemize}
+    \item \textbf{Thermal Design:}
+    \begin{itemize}
+        \item \textbf{Operating Temperature:} -25°C to +80°C
+        \item \textbf{Thermal Throttling:} Reduces frequency when too hot
+        \item \textbf{Heat Sink Required:} Passive or active cooling needed
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Real-World Performance: What These Specs Mean}
+\begin{itemize}
+    \item \textbf{CPU Performance Examples:}
+    \begin{itemize}
+        \item \textbf{Web Browsing:} 1-2 cores at 10-30\% utilization
+        \item \textbf{Video Encoding:} 8-12 cores at 70-90\% utilization
+        \item \textbf{Compilation:} All 12 cores at high utilization
+        \item \textbf{AI Inference:} CPU + GPU collaboration
+    \end{itemize}
+    \item \textbf{Memory Access Patterns:}
+    \begin{itemize}
+        \item \textbf{Cache Hit Rate:} 95-99\% for optimized applications
+        \item \textbf{Cache Miss Penalty:} 100× performance impact
+        \item \textbf{Memory Bandwidth:} Critical for GPU-accelerated workloads
+    \end{itemize}
+    \item \textbf{Practical Implications:}
+    \begin{itemize}
+        \item \textbf{Algorithm Design:} Consider cache-friendly data access
+        \item \textbf{Parallel Programming:} Utilize multiple cores effectively
+        \item \textbf{Memory Management:} Minimize cache misses and memory allocations
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Benchmark Comparison: Understanding Relative Performance}
+\begin{itemize}
+    \item \textbf{Jetson Orin AGX vs Other Systems:}
+    \begin{itemize}
+        \item \textbf{Raspberry Pi 4:} ~15× faster (CPU), ~100× faster (AI)
+        \item \textbf{Intel i7-12700H Laptop:} ~0.8× slower (CPU), competitive (AI)
+        \item \textbf{Desktop RTX 4080:} ~0.3× performance, but 4× more power efficient
+    \end{itemize}
+    \item \textbf{Performance Metrics Explained:}
+    \begin{itemize}
+        \item \textbf{TOPS (Tera Ops/Sec):} AI/ML operations per second
+        \item \textbf{FLOPS (Floating Point Ops/Sec):} Scientific computing performance
+        \item \textbf{Instructions Per Second:} General computing capability
+        \item \textbf{Memory Bandwidth:} Data transfer capacity
+    \end{itemize}
+    \item \textbf{Why Comparisons Are Complex:}
+    \begin{itemize}
+        \item Different architectures excel at different tasks
+        \item Software optimization matters significantly
+        \item Power consumption vs performance trade-offs
+        \item Use case determines which metrics matter most
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Key Takeaways: Understanding Computer Specifications}
+\begin{itemize}
+    \item \textbf{Clock Speed (3.4 GHz):}
+    \begin{itemize}
+        \item 3.4 billion cycles per second
+        \item Not the only performance factor
+        \item Modern CPUs execute multiple instructions per cycle
+    \end{itemize}
+    \item \textbf{Core Count (12 cores):}
+    \begin{itemize}
+        \item Enables parallel processing
+        \item More cores = better multitasking and parallel workloads
+        \item Single-threaded performance still depends on individual core speed
+    \end{itemize}
+    \item \textbf{Memory Hierarchy:}
+    \begin{itemize}
+        \item Cache hits are crucial for performance
+        \item Memory bandwidth limits parallel processing
+        \item Unified memory simplifies programming but requires careful management
+    \end{itemize}
+    \item \textbf{Specialized Processing:}
+    \begin{itemize}
+        \item GPUs excel at parallel tasks (AI, graphics, scientific computing)
+        \item CPUs excel at sequential tasks (general computing, control logic)
+        \item Modern systems combine both for optimal performance
     \end{itemize}
 \end{itemize}
 \end{frame}  

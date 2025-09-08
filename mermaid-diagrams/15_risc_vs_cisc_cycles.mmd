@@ -1,4 +1,4 @@
-```mermaid
+
 flowchart LR
     subgraph RISC["🏃 RISC Architecture"]
         direction TB
@@ -20,11 +20,13 @@ flowchart LR
     CISC -.-> Comparison
     
     %% Styling
-    classDef riscStyle fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
-    classDef ciscStyle fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef compStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef riscStyle fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px,color:#000000
+    classDef ciscStyle fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000000
+    classDef compStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000000
+    classDef defaultStyle color:#000000
+    classDef lightText color:#ffffff 
     
     class R1,R2,R3 riscStyle
     class C1,C2,C3 ciscStyle
     class Comparison compStyle
-```
+    class RISC,CISC lightText

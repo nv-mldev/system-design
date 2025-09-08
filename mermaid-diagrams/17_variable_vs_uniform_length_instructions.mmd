@@ -1,4 +1,4 @@
-```mermaid
+
 flowchart TD
     Title["🎯 Instruction Length: Architecture Design Choice"]
     
@@ -50,12 +50,14 @@ flowchart TD
     Modern --> M3["🔄 Hybrid Approaches:<br/>CISC instructions → RISC μ-ops<br/>Best of both worlds"]
     
     %% Styling
-    classDef riscStyle fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
-    classDef ciscStyle fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef benefitStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    classDef challengeStyle fill:#ffebee,stroke:#c62828,stroke-width:2px
-    classDef comparisonStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
-    classDef modernStyle fill:#f1f8e9,stroke:#558b2f,stroke-width:2px
+    classDef riscStyle fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px,color:#000000
+    classDef ciscStyle fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000000
+    classDef benefitStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#000000
+    classDef challengeStyle fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#000000
+    classDef comparisonStyle fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000000
+    classDef modernStyle fill:#f1f8e9,stroke:#558b2f,stroke-width:2px,color:#000000
+    classDef default color:#000000
+    classDef lightText color:#ffffff
     
     class RISC_Side,RISC_Example,RB1,RB2,RB3,RB4,TechRISC,TR1 riscStyle
     class CISC_Side,CISC_Example,CB1,CB2,CB3,TechCISC,TC1 ciscStyle
@@ -63,4 +65,4 @@ flowchart TD
     class CISC_Challenges,CC1,CC2,CC3 challengeStyle
     class Comparison,Trade1,Trade2 comparisonStyle
     class Modern,M1,M2,M3 modernStyle
-```
+    class Title lightText

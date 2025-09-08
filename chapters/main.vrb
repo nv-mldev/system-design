@@ -1,16 +1,8 @@
-\frametitle{x86 Instruction Set Example}
-\begin{itemize}
-    \item \textbf{x86 Assembly Examples:}
-\end{itemize}
+\frametitle{x86 Instruction Set Example: Addressing, Strings \& Stack}
+    \begin{itemize}
+        \item \textbf{x86 Assembly Examples:}
+    \end{itemize}
 \begin{verbatim}
-// Complex Memory Operations
-ADD [EBX], EAX      // Add EAX to memory[EBX], store in memory
-MOV EAX, [EBX+4]    // Load from memory[EBX+4] to EAX
-
-// Variable Length Instructions
-MOV AL, 5           // 2 bytes: Move immediate to 8-bit register
-MOV EAX, 0x12345678 // 5 bytes: Move 32-bit immediate to register
-
 // Complex Addressing Modes
 MOV EAX, [EBX + ECX*2 + 8]  // EAX = memory[EBX + ECX*2 + 8]
 
@@ -22,5 +14,5 @@ PUSH EAX           // Push EAX onto stack
 CALL function      // Call function (push return address + jump)
 \end{verbatim}
 \begin{itemize}
-    \item \textbf{Note:} Instructions vary from 1-15 bytes, complex decoding required
+    \item \textbf{Note:} Complex decoding required for advanced addressing and control instructions
 \end{itemize}
